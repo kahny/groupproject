@@ -21,11 +21,11 @@ class User < ActiveRecord::Base
 		:presence => true
 
 
-	validates :isOwner,
-		:inclusion => {:in => [true, false]}
+	# validates :isOwner,
+	# 	:inclusion => {:in => [true, false]}
 
 	#add more specifics for location
-	validates :location,
-		:presence =>true
+	# validates :location,
+	# 	:presence =>true
 
 end

@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       t.boolean :isOwner
       t.string :location
+      t.string :image_url
 
       t.timestamps
     end

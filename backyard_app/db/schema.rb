@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140830232451) do
     t.string   "password_digest"
     t.boolean  "isOwner"
     t.string   "location"
+    t.string   "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
