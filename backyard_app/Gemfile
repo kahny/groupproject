@@ -43,4 +43,5 @@ group :development, :test do
 	gem "letter_opener"
   gem 'rspec-rails', '~> 3.0.0'
   gem 'pry-rails'
+  gem 'ffaker', '~> 1.25.0'
 end
