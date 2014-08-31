@@ -1,9 +1,39 @@
  <div class="row">
-  <div class="col-xs-6 col-sm-3">test 1</div>
-  <div class="col-xs-6 col-sm-3">test 2</div>
+  <div class="col-xs-8 col-sm-4">test 1</div>
+  <div class="col-xs-8 col-sm-4">
+  	<%= form_for @user do |f| %>
+  		<div class="form-group">
+	  		<%= f.label :first_name %>:
+	  		<%= f.text_field :first_name, class: "form-control" %>
+  		</div>
 
+  		<div class="form-group">
+	  		<%= f.label :last_name %>:
+	  		<%= f.text_field :last_name, class: "form-control" %>
+  		</div>
+
+  		<div class="form-group">
+	  		<%= f.label :email %>:
+	  		<%= f.email_field :email, class: "form-control" %>
+  		</div>
+
+  		<div class="form-group">
+	  		<%= f.label :password %>:
+	  		<%= f.password_field :password, class: "form-control" %>
+  		</div>
+
+  		<div class="form-group">
+	  		<%= f.label :image_url %>:
+	  		<%= f.text_field :image_url, class: "form-control" %>
+  		</div>
+
+  		<div class="form-group">
+	  		<%= f.submit "Create User", class: "form-control btn btn-danger" %>
+  		</div>
+  	<% end %>
+
+  </div>
+  <div class="col-xs-8 col-sm-4">test 3</div>
   <div class="clearfix visible-xs-block"></div>
 
-  <div class="col-xs-6 col-sm-3">test 3</div>
-  <div class="col-xs-6 col-sm-3">test 4</div>
 </div>

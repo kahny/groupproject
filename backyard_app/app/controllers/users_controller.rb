@@ -16,9 +16,10 @@ class UsersController < ApplicationController
   		:last_name,
   		:email,
   		:password,
+  		:image_url,
   		:isOwner,
   		:location)
-  	@user = User.create(new_user)
+  	@user = User.new(new_user)
 
   	redirect_to user
   end
