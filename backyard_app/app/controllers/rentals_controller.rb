@@ -5,12 +5,14 @@ class RentalsController < ApplicationController
 
 
   def new
-  	@user = params[:id]
-  	@rental = @user.rental.new
+
+  	user_id = params[:user_id]
+  	@user = User.find_by_id(user_id)
+  	@rental = @user.rentals.new
   end
 
   def create
-  	@user = params[:id] #change to current user
+  	@user = params[:id] #change to current user when sessions are done
 
   	new_rental = params.require(:rental).permit(
   		:title,
