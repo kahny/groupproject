@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20140901184659) do
   end
 
   create_table "rentals", force: true do |t|
-    t.integer  "user_id"
     t.string   "title"
     t.string   "description"
     t.string   "location"
@@ -36,11 +35,8 @@ ActiveRecord::Schema.define(version: 20140901184659) do
   end
 
   create_table "reviews", force: true do |t|
-    t.integer  "user_id"
     t.integer  "rating"
     t.text     "description"
-    t.integer  "reviewable_id"
-    t.string   "reviewable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
