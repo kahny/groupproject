@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get "/logout", to: "session#destroy" #TO DO: delete this before production
 
+  get "/signup", to: "users#new"
+
   get "/rentals", to: "rentals#index", as: "browse"
 
   get "/about", to: "site#about", as: "about"

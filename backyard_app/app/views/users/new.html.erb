@@ -1,14 +1,14 @@
-<nav>
-  <a href="/">Home</a>
-</nav>
-
  <div class="row">
-  <div class="col-xs-8 col-sm-4">test 1</div>
-  <div class="col-xs-8 col-sm-4">
-  	<%= form_for @user do |f| %>
+  <div class="col-xs-8 col-sm-4"></div>
+  <div class="col-xs-8 col-sm-4 col-offset-4">
+
+    <h1>Sign-up</h1>
+
+    <!-- new user form -->
+    <%= form_for @user do |f| %>
   		<div class="form-group">
 	  		<%= f.label :first_name %>:
-	  		<%= f.text_field :first_name, class: "form-control" %>
+	  		<%= f.text_field :first_name, class: "form-control", :autofocus => true %>
   		</div>
 
   		<div class="form-group">
@@ -23,7 +23,7 @@
 
   		<div class="form-group">
 	  		<%= f.label :password %>:
-	  		<%= f.password_field :password_digest, class: "form-control" %>
+	  		<%= f.password_field :password, class: "form-control" %>
   		</div>
 
   		<div class="form-group">
@@ -37,7 +37,7 @@
   	<% end %>
 
   </div>
-  <div class="col-xs-8 col-sm-4">test 3</div>
+  <div class="col-xs-8 col-sm-4"></div>
   <div class="clearfix visible-xs-block"></div>
 
 </div>
