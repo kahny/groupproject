@@ -22,4 +22,26 @@ class UsersController < ApplicationController
 
   	redirect_to root_path
   end
+
+  def update
+    if session[:user_id] == nil
+      redirect_to root_path
+    else
+      @current_user = user.find_by_id(session[:user_id])
+    end
+    user_id = params[:id]
+    res = params.require(:user).permit(
+      :first_name,
+      :last_name,
+      :email,
+      :image_url)
+    user = User.find_by_id(user_id)
+
+    user.update_attributes(
+      :first_name => res[:first_name],
+      :last_name  => res[:last_name],
+      :email      => res[:email],
+      :image_url  => res[:image_url])
+    redirect_to users_path(user_id)
+  end
 end

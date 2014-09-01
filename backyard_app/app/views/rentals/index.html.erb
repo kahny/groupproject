@@ -1,10 +1,13 @@
 
 <div class="row">
-  <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-     <h1>HOME PAGE</h1>
-  </div>
 
-    <div class="col-xs-12 col-sm-8 col-sm-offset-4">
+  <div class="col-xs-8 col-sm-4"></div>
+  <div class="col-xs-8 col-sm-4">
+     <h1>HOME PAGE</h1>
+
+
+
+
       <nav>
         <div class="btn btn-default">
           <a href="/">Root</a>
@@ -19,8 +22,16 @@
           <a href="/rentals">Rentals Index</a>
         </div>
         <div class="btn btn-default">
-          <a href="/users/18/rentals/new">Rentals New</a>
+          <a href="/users/16/rentals/new">Rentals New</a>
+          <!-- hard coded user -->
         </div>
       </nav>
+
+    <div class="col-xs-8 col-sm-4">
+
+      <%= for @rentals do |rental| %>
+
+
+    </div>
   </div>
 </div>

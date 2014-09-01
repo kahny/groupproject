@@ -3,6 +3,8 @@ class RentalsController < ApplicationController
   before_action :is_authenticated?
 
   def index
+    @rentals = Rental.all
+
   end
 
 
@@ -21,9 +23,9 @@ class RentalsController < ApplicationController
     	new_rental = params.require(:rental).permit(
     		:title,
     		:description,
-    		:address,
+    		:location,
     		:price,
-    		:catagory,
+    		:category,
     		:image_url)
     	rental = Rental.create(new_rental)
 

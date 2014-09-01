@@ -2,7 +2,7 @@
   <div class="col-xs-8 col-sm-4"></div>
   <div class="col-xs-8 col-sm-4 col-offset-4">
 
-    <h1>Sign-up</h1>
+    <h1>Edit your account</h1>
 
     <!-- new user form -->
     <%= form_for @user do |f| %>
@@ -19,11 +19,6 @@
   		<div class="form-group">
 	  		<%= f.label :email %>:
 	  		<%= f.email_field :email, class: "form-control" %>
-  		</div>
-
-  		<div class="form-group">
-	  		<%= f.label :password %>:
-	  		<%= f.password_field :password, class: "form-control" %>
   		</div>
 
   		<div class="form-group">
