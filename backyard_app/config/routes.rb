@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'session/new'
+
+  get 'session/create'
+
+  get 'session/destroy'
+
   root to: "site#index"
 
   get "/rentals", to: "rentals#index", as: "browse"
