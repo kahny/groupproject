@@ -23,11 +23,16 @@ class UsersController < ApplicationController
   	redirect_to root_path
   end
 
+  def edit
+    user_id = params[:id]
+    @user = User.find_by_id(user_id)
+  end
+
   def update
     if session[:user_id] == nil
       redirect_to root_path
     else
-      @current_user = user.find_by_id(session[:user_id])
+      @current_user = User.find_by_id(session[:user_id])
     end
     user_id = params[:id]
     res = params.require(:user).permit(
@@ -42,7 +47,7 @@ class UsersController < ApplicationController
       :last_name  => res[:last_name],
       :email      => res[:email],
       :image_url  => res[:image_url])
-    redirect_to users_path(user_id)
+    redirect_to '/users/#{user_id}'
   end
 
   def show
