@@ -3,7 +3,7 @@
 
   <div class="col-xs-8 col-sm-4"></div>
   <div class="col-xs-8 col-sm-4">
-     <h1><%= @user.first_name @user.last_name %></h1>
+     <h1><%= @user.first_name %> <%= @user.last_name %></h1>
      <img src="<%= @user.image_url %>">
      <p><%= @user.location %></p>
 
@@ -21,7 +21,7 @@
           <a href="/rentals">Rentals Index</a>
         </div>
         <div class="btn btn-default">
-          <a href="<%= new_user_rental_path %>">Rentals New</a>
+          <a href="<%= new_user_rental_path(@user.id) %>">Rentals New</a>
           <!-- hard coded user -->
         </div>
       </nav>
