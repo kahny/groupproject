@@ -1,6 +1,7 @@
 require 'ffaker'
 
 pics = ["http://media-cache-ec0.pinimg.com/736x/74/86/37/748637dfe0c9cbef96278660fe0f1fe7.jpg", "http://media-cache-ak0.pinimg.com/736x/06/8b/d5/068bd5ddb4a8b001633702155b6e8c1d.jpg", "http://media-cache-ec0.pinimg.com/736x/04/84/c6/0484c6d34561914eb6f74fb8502dee83.jpg", "http://images.meredith.com/content/dam/bhg/Images/2006/05/100028804.jpg.rendition.largest.jpg", "http://images.meredith.com/content/dam/bhg/Images/2006/05/100028795.jpg.rendition.largest.jpg", "http://images.meredith.com/content/dam/bhg/Images/2006/05/100028824.jpg.rendition.largest.jpg", "http://images.meredith.com/content/dam/bhg/Images/2006/05/100028798b.jpg.rendition.largest.jpg", "http://images.meredith.com/content/dam/bhg/Images/2006/05/100028797b.jpg.rendition.largest.jpg", "http://images.meredith.com/content/dam/bhg/Images/2006/05/100028806.jpg.rendition.largest.jpg", "http://media-cache-ec0.pinimg.com/736x/15/57/8e/15578e3e6bd5f41fb3fd23a0162fbdcb.jpg"]
+prof = ["https://avatars3.githubusercontent.com/u/7664271?v=2&s=460", "https://avatars1.githubusercontent.com/u/7417042?v=2&s=400", "https://avatars3.githubusercontent.com/u/7505018?v=2&s=460", "https://avatars1.githubusercontent.com/u/6566275?v=2&s=460"]
 categories = ["pool", "backyard", "BBQ"]
 prices = [500, 560, 570, 400, 250, 300, 350, 330, 70, 90, 110]
 rating = [1, 2, 3, 4, 5]
@@ -13,6 +14,7 @@ rating = [1, 2, 3, 4, 5]
   user_params[:password_digest] = Faker::Internet.password(6)
   user_params[:isOwner] = true
   user_params[:location] = Faker::Address.street_address
+  user_params[:image_url] = prof.sample
   new_user = User.create(user_params)
 
   (1..15).each do
