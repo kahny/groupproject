@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
 	has_many :rentals, :through => :rental_users, dependent: :destroy
 	has_many :rental_users
 
-	has_many :reviews, :through => :review_users, dependent: :destroy
+	has_many :reviews, :through => :review_users, as: :reviewable, dependent: :destroy
+
 	has_many :review_users
 	validates :email,
 		:presence => true,

@@ -1,4 +1,5 @@
 class Rental < ActiveRecord::Base
+	has_many :reviews, as: :reviewable
 	has_many :users, :through => :rental_users, dependent: :destroy
 	has_many :rental_users
 

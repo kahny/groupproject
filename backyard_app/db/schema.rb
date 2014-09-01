@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20140830232451) do
   create_table "reviews", force: true do |t|
     t.integer  "rating"
     t.text     "description"
+    t.integer  "reviewable_id"
+    t.string   "reviewable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
