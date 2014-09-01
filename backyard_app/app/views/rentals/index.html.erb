@@ -29,8 +29,19 @@
 
     <div class="col-xs-8 col-sm-4">
 
-      <%= for @rentals do |rental| %>
+      <%= @rentals.each do |rental| %>
+        <li>
+          <a href=""><%= rental.title %></a>
+          <br>
+          <p>Location:
+          <%= rental.location %> </p>
+          <p>Price:
+          <%= rental.price %> </p>
+          <img src="<%= rental.image_url %>"
 
+        </li>
+
+      <% end %>
 
     </div>
   </div>
