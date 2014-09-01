@@ -3,7 +3,7 @@
 
   <div class="col-xs-8 col-sm-4"></div>
   <div class="col-xs-8 col-sm-4">
-     <h1>HOME PAGE</h1>
+     <h1>Rentals Index</h1>
 
 
 
@@ -31,13 +31,14 @@
 
       <%= @rentals.each do |rental| %>
         <li>
-          <a href=""><%= rental.title %></a>
+        <!-- need to add route when models are figured out -->
+          <a href="#"><%= rental.title %></a>
           <br>
           <p>Location:
           <%= rental.location %> </p>
           <p>Price:
           <%= rental.price %> </p>
-          <img src="<%= rental.image_url %>"
+          <img src="<%= rental.image_url %>">
 
         </li>
 

@@ -4,9 +4,7 @@ class RentalsController < ApplicationController
 
   def index
     @rentals = Rental.all
-
   end
-
 
   def new
     @user = current_user
@@ -50,6 +48,11 @@ class RentalsController < ApplicationController
       session[:user_id] = nil
       redirect_to root_path
     end
+  end
+
+  def show
+    rental_id = params[:id]
+    @rental = Rental.find_by_id(rental_id)
   end
 
 

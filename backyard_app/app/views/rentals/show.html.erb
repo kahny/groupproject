@@ -1,0 +1,35 @@
+
+<div class="row">
+
+  <div class="col-xs-8 col-sm-4"></div>
+  <div class="col-xs-8 col-sm-4">
+     <h1><%= @rental.title %></h1>
+     <img src="<%= @rental.image_url %>">
+     <p><%= @rental.location %></p>
+     <p><%= @rental.price %></p>
+     <p><%= @rental.description %></p>
+     <p><%= @rental.description %></p>
+
+      <nav>
+        <div class="btn btn-default">
+          <a href="/">Root</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/users/new">Sign-up</a>
+        </div>
+        <div class="btn btn-default">
+           <a href="/login">Login</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/rentals">Rentals Index</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/users/16/rentals/new">Rentals New</a>
+          <!-- hard coded user -->
+        </div>
+      </nav>
+
+    <div class="col-xs-8 col-sm-4">
+    </div>
+  </div>
+</div>
