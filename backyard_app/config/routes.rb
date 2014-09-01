@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'reviews/index'
+  root to: "site#index"
 
-  get 'rentals/index'
-
-  get 'users/index'
-
-  get 'user/index'
+  get "/rentals", to: "rentals#index", as: "browse"
 
   resources :users do
       resources :reviews
