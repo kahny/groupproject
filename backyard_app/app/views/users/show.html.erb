@@ -1,2 +1,32 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+
+<div class="row">
+
+  <div class="col-xs-8 col-sm-4"></div>
+  <div class="col-xs-8 col-sm-4">
+     <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+     <img src="<%= @user.image_url %>">
+     <p><%= @user.location %></p>
+
+      <nav>
+        <div class="btn btn-default">
+          <a href="/">Root</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/users/new">Sign-up</a>
+        </div>
+        <div class="btn btn-default">
+           <a href="/login">Login</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/rentals">Rentals Index</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="<%= new_user_rental_path(@user.id) %>">Rentals New</a>
+          <!-- hard coded user -->
+        </div>
+      </nav>
+
+    <div class="col-xs-8 col-sm-4">
+    </div>
+  </div>
+</div>

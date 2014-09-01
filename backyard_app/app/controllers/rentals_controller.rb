@@ -3,8 +3,8 @@ class RentalsController < ApplicationController
   before_action :is_authenticated?
 
   def index
+    @rentals = Rental.all
   end
-
 
   def new
     @user = current_user
@@ -21,9 +21,9 @@ class RentalsController < ApplicationController
     	new_rental = params.require(:rental).permit(
     		:title,
     		:description,
-    		:address,
+    		:location,
     		:price,
-    		:catagory,
+    		:category,
     		:image_url)
     	rental = Rental.create(new_rental)
 
@@ -35,6 +35,24 @@ class RentalsController < ApplicationController
       redirect_to login_path
     end
 
+  end
+
+  def destroy
+    if User.find(params[:user_id]) == current_user
+      rental_id = params[:rental_id]
+      rental = find_by_id(rental_id)
+      rental.destroy
+      redirect_to root_path
+      flash[:notice] = "Rental removed"
+    else
+      session[:user_id] = nil
+      redirect_to root_path
+    end
+  end
+
+  def show
+    rental_id = params[:id]
+    @rental = Rental.find_by_id(rental_id)
   end
 
 
