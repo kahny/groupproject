@@ -1,6 +1,6 @@
-class CreateRentalAgreements < ActiveRecord::Migration
+class CreateAgreements < ActiveRecord::Migration
   def change
-    create_table :rental_agreements do |t|
+    create_table :agreements do |t|
       t.integer :rental_id
       t.integer :user_id #rentee
 

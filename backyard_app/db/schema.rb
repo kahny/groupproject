@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20140901184659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "rental_agreements", force: true do |t|
+  create_table "agreements", force: true do |t|
     t.integer  "rental_id"
     t.integer  "user_id"
     t.datetime "created_at"

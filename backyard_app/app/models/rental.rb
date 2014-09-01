@@ -1,7 +1,7 @@
 class Rental < ActiveRecord::Base
 	has_many :reviews, as: :reviewable
 	belongs_to :user, dependent: :destroy
-	has_many :rental_agreements
+	has_many :agreements
 
 	validates :title,
 		:presence => true
