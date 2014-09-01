@@ -44,4 +44,9 @@ class UsersController < ApplicationController
       :image_url  => res[:image_url])
     redirect_to users_path(user_id)
   end
+
+  def show
+    user_id = params[:user_id]
+    @user = User.find_by_id(user_id)
+  end
 end
