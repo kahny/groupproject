@@ -1,7 +1,15 @@
  <div class="row">
-  <div class="col-xs-8 col-sm-4">test 1</div>
+
+  <div class="col-xs-12 col-sm-offset-4">
+    <h1>Share your space</h1>
+    <p>Make money by renting out your space! List your backyard now. </p>
+  </div>
+
+  <div class="col-xs-8 col-sm-4"></div>
   <div class="col-xs-8 col-sm-4">
-  	<%= form_for [@user, @rental] do |f| %>
+
+    <!-- FORM FOR ADDING RENTAL -->
+    <%= form_for [@user, @rental] do |f| %>
   		<div class="form-group">
 	  		<%= f.label :title %>:
 	  		<%= f.text_field :title, autofocus: true, class: "form-control" %>
@@ -36,9 +44,31 @@
 	  		<%= f.submit "Create Rental", class: "form-control btn btn-danger" %>
   		</div>
   	<% end %>
-
   </div>
-  <div class="col-xs-8 col-sm-4">test 3</div>
+
+  <div class="col-xs-8 col-sm-4"></div>
   <div class="clearfix visible-xs-block"></div>
+
+    <div class="col-xs-12 col-sm-8 col-sm-offset-4">
+      <nav>
+        <div class="btn btn-default">
+          <a href="/">Root</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/users/new">Sign-up</a>
+        </div>
+        <div class="btn btn-default">
+           <a href="/login">Login</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/rentals">Rentals Index</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/users/1/rentals/new">Rentals New</a>
+        </div>
+      </nav>
+  </div>
+
+
 
 </div>

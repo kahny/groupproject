@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get "/signup", to: "users#new"
 
+  # this might not be necessary
   get "/rentals", to: "rentals#index", as: "browse"
 
   get "/about", to: "site#about", as: "about"
