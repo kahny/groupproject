@@ -37,5 +37,18 @@ class RentalsController < ApplicationController
 
   end
 
+  def destroy
+    if User.find(params[:user_id]) == current_user
+      rental_id = params[:rental_id]
+      rental = find_by_id(rental_id)
+      rental.destroy
+      redirect_to root_path
+      flash[:notice] = "Rental removed"
+    else
+      session[:user_id] = nil
+      redirect_to root_path
+    end
+  end
+
 
 end
