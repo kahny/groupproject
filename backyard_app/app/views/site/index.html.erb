@@ -1,13 +1,9 @@
 
-<div class="row">
-
+ <div class="row">
   <div class="col-xs-8 col-sm-4"></div>
-  <div class="col-xs-8 col-sm-4">
-     <h1>Rentals Index</h1>
+  <div class="col-xs-8 col-sm-4 col-offset-4">
 
-
-
-
+     <h1>HOME PAGE</h1>
       <nav>
         <div class="btn btn-default">
           <a href="/">Root</a>
@@ -23,27 +19,13 @@
         </div>
         <div class="btn btn-default">
           <a href="<%= new_user_rental_path %>">Rentals New</a>
-
         </div>
       </nav>
-
-    <div class="col-xs-8 col-sm-4">
-
-      <%= @rentals.each do |rental| %>
-        <li>
-        <!-- need to add route when models are figured out -->
-          <a href="#"><%= rental.title %></a>
-          <br>
-          <p>Location:
-          <%= rental.location %> </p>
-          <p>Price:
-          <%= rental.price %> </p>
-          <img src="<%= rental.image_url %>">
-
-        </li>
-
-      <% end %>
-
-    </div>
   </div>
+  <div class="col-xs-8 col-sm-4 col-offset-4">
 </div>
+
+
+
+
+

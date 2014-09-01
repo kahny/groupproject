@@ -1,12 +1,23 @@
 Rails.application.routes.draw do
 
-  get 'reviews/index'
+  root to: "site#index"
 
-  get 'rentals/index'
+  get "/login", to: "session#new"
 
-  get 'users/index'
+  post "login", to: "session#create"
 
-  get 'user/index'
+  delete "/logout", to: "session#destroy"
+
+  get "/logout", to: "session#destroy" #TO DO: delete this before production
+
+  get "/signup", to: "users#new"
+
+  # this might not be necessary
+  get "/rentals", to: "rentals#index", as: "browse"
+
+  get "/about", to: "site#about", as: "about"
+
+  get "/contact", to: "site#contact", as: "contact"
 
   resources :users do
       resources :reviews
