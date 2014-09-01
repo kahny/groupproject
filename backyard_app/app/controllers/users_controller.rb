@@ -47,7 +47,7 @@ class UsersController < ApplicationController
       :last_name  => res[:last_name],
       :email      => res[:email],
       :image_url  => res[:image_url])
-    redirect_to '/users/#{user_id}'
+    redirect_to "/users/#{user_id}"
   end
 
   def show
