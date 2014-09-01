@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+    <h1>Login</h1>
+
+    <!-- need to test this -->
+    <% flash.each do |k, v|%>
+      <p id="<%= k %>"><%= v %></p>
+    <% end %>
+
+      <!-- LOGIN FORM -->
+      <%= form_for :user do |f| %>
+          <div class="form-group">
+            <%= f.label :email  %>:
+            <%= f.text_field :email, class: "form-control", placeholder: "Enter your email" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password %>:
+            <%= f.password_field :password, class: "form-control", placeholder: "Enter password" %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "Login", class: "form-control btn btn-danger"%>
+          </div>
+      <% end %>
+
+      <%= link_to ">> Make an account", signup_path %>
+  </div>
+
+    <div class="col-xs-12 col-sm-8 col-sm-offset-4">
+      <nav>
+        <div class="btn btn-default">
+          <a href="/">Root</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/users/new">Sign-up</a>
+        </div>
+        <div class="btn btn-default">
+           <a href="/login">Login</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/rentals">Rentals Index</a>
+        </div>
+        <div class="btn btn-default">
+          <a href="/users/18/rentals/new">Rentals New</a>
+        </div>
+      </nav>
+  </div>
+</div>

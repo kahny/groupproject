@@ -14,12 +14,12 @@ class UsersController < ApplicationController
   		:first_name,
   		:last_name,
   		:email,
-  		:password_digest,
+  		:password,
   		:image_url,
   		:isOwner,
   		:location)
   	user = User.create(new_user)
 
-  	redirect_to user_path(user)
+  	redirect_to root_path
   end
 end

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	has_secure_password
+
 	has_many :rentals, :through => :rental_users, dependent: :destroy
 	has_many :rental_users
 
@@ -27,5 +29,9 @@ class User < ActiveRecord::Base
 	#add more specifics for location
 	# validates :location,
 	# 	:presence =>true
+
+	def self.authenticate email, password
+		User.find_by_email(email).try(:authenticate, password)
+	end
 
 end
