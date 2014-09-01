@@ -10,7 +10,6 @@ class UsersController < ApplicationController
   end
 
   def create
-
   	new_user = params.require(:user).permit(
   		:first_name,
   		:last_name,
