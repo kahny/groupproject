@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
-	has_many :users, :through => :review_users, dependent: :destroy
-	has_many :review_users
+	belongs_to :reviewable, polymorphic: true
+	belongs_to :user
 
 validates :rating,
 	:presence => true,
