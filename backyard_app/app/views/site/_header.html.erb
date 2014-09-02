@@ -1,16 +1,18 @@
 <div class="siteheader">
   <div class="container">
       <h1 id="sitetitle">backyard application</h1>
-      <%= form_for @search do |f| %>
+      <%= form_for @search, method: :get, url: '/search', html: {id: 'search-bar'} do |f| %>
         <div class="form-group">
-          <%= f.label :search %>:
-          <%= f.text_field :search, autofocus: true, class: "form-control" %>
+
+          <%= f.text_field :search, autofocus: true, class: "form-control searchval" %>
         </div>
       <% end %>
       <p id="sitedescrip">take advantage of other people's backyards</p>
   </div>
 
-   <!-- <div id="selectbar">
+<h1><%= @loc%></h1>
+
+<!--    <div id="selectbar">
     <p id="selectbartext">Start by choosing a neighborhood:</p>
     <div id="select-bar-btn" class="btn-group btn-group-sm">
       <div class="btn-group">
@@ -21,6 +23,6 @@
       </div>
       <div class="btn-group">
         <button type="button" class="btn btn-default">Nob Hill</button>
-      </div> -->
- <!--    </div> -->
+      </div>
+   </div> -->
   </div>
