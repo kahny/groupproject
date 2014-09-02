@@ -16,12 +16,12 @@
         <li><a href="/rentals">View Listings</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-         <% if @user != @current_user %>
+         <% if @current_user %>
+           <p class="navbar-text"><a href="/users/<%= @current_user.id  %>"><%= @current_user.first_name %></a></p>
+          <li><a href="/logout">Logout</a></li>
+        <% else %>
           <li><a href="/login">Login</a></li>
           <li><a href="/users/new">Sign-up</a></li>
-        <% else %>
-          <p class="navbar-text"><a href="/users/<%= @user.id  %>"><%= @user.first_name %></a></p>
-          <li><a href="/logout">Logout</a></li>
         <% end %>
       </ul>
     </div>

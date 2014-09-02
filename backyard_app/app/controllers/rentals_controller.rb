@@ -6,8 +6,7 @@ class RentalsController < ApplicationController
     @rentals = Rental.all
 
     #find user for nav bar
-    id = current_user.id
-    @user = User.find_by_id(id)
+    @current_user = current_user
   end
 
   def new
@@ -60,9 +59,9 @@ class RentalsController < ApplicationController
     @rental = Rental.find_by_id(rental_id)
 
     @reviews = @rental.reviews
+
     #find user for nav bar
-    id = current_user.id
-    @user = User.find_by_id(id)
+    @current_user = current_user
 
   end
 
