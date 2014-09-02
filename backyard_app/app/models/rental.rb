@@ -3,6 +3,9 @@ class Rental < ActiveRecord::Base
 	belongs_to :user, dependent: :destroy
 	has_many :agreements
 
+	geocoded_by :location
+	after_validation :geocode
+
 	validates :title,
 		:presence => true
 

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root to: "site#index"
 
+  get "/search",         to: "site#search", as: "search"
+
   get "/login",     to: "session#new"
 
   post "/login",    to: "session#create"
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
   get "/contact",   to: "site#contact", as: "contact"
 
   post "/users/:user_id/rentals/:rental_id/reviews",  to: "reviews#create"
+
 
   resources :users do
       resources :reviews
