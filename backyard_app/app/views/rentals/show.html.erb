@@ -9,7 +9,8 @@
      <p><%= @rental.description %></p>
 
       <%= render partial: "site/nav" %>
-
+      <!-- not working yet -->
+      <%= button_to "Delete", action: "destroy", method: "delete" %>
     <div class="col-xs-8 col-sm-4">
     </div>
   </div>
