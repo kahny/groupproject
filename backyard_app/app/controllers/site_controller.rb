@@ -3,12 +3,12 @@ class SiteController < ApplicationController
   def index
     #find user for nav bar
     @current_user = current_user
+
     @search = ""
 
   end
 
   def search
-
   	# loc = params.require(:search)
     loc = params[:search]
 
@@ -21,7 +21,8 @@ class SiteController < ApplicationController
     end
 
     @locations = Rental.near(location_arr, 30)
-
+    # Loop through each
+    p @locations
     render nothing: true
   end
 
