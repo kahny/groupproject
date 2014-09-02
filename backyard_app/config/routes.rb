@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get "/contact",   to: "site#contact", as: "contact"
 
+  post "/users/:user_id/rentals/:rental_id/reviews",  to: "reviews#create"
+
   resources :users do
       resources :reviews
       resources :rentals
