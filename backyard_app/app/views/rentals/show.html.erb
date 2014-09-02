@@ -1,12 +1,18 @@
-
 <div class="row">
+
+  <div class="col-xs-8 col-sm-4"></div>
   <div class="col-xs-8 col-sm-4">
      <h1><%= @rental.title %></h1>
      <img src="<%= @rental.image_url %>">
      <p><%= @rental.location %></p>
-     <p><%= @rental.price %></p>
+     <p>$<%= @rental.price %></p>
      <p><%= @rental.description %></p>
-     <p><%= @rental.description %></p>
+
+      <%= render partial: "site/nav" %>
+
+    <div class="col-xs-8 col-sm-4">
     </div>
   </div>
+
+  <!-- add go back button to previous results page  -->
 </div>

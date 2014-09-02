@@ -37,10 +37,11 @@ gem 'handlebars_assets'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+group :development do
+	gem 'letter_opener'
+end
 
 group :development, :test do
-	gem "letter_opener"
   gem 'rspec-rails', '~> 3.0.0'
   gem 'pry-rails'
   gem 'ffaker', '~> 1.25.0'
