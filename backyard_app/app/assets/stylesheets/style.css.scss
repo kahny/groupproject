@@ -1,6 +1,38 @@
-
+@import url(http://fonts.googleapis.com/css?family=Lobster:400normal);
+@import url(http://fonts.googleapis.com/css?family=Arimo:400normal);
 
 #rentalsHeader {
   padding: 50px 0;
   text-align: center;
+}
+
+.siteheader {
+  height: 400px;
+  background-color: rgb(101, 193, 143);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#sitetitle {
+  font-family:'Lobster', cursive;
+  margin-top: 100px;
+  font-size: 5em;
+}
+
+#sitedescrip {
+  margin-top: 25px;
+  margin-bottom: 68px;
+  font-size: 1.5em;
+  font-family: 'Arimo', sans-serif;
+}
+
+#selectbar {
+  height: 100px;
+  background-color: rgba(0, 0, 0, .5)
+}
+
+#selectbartext {
+  font-family: 'Arimo', sans-serif;
+  color: black;
+  margin-bottom: 20px;
 }

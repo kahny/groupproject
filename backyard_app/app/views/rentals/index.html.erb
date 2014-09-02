@@ -1,11 +1,5 @@
 <%= render partial: "site/nav", locals: { user: @user } %>
-
-<div id="rentalsHeader" class="row">
-  <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-    <h1>Rentals Index</h1>
-
-  </div>
-</div>
+<%= render partial: "site/header" %>
 
 <div class="row">
   <%= @rentals.each do |rental| %>
