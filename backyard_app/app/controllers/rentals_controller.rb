@@ -54,6 +54,8 @@ class RentalsController < ApplicationController
   def show
     rental_id = params[:id]
     @rental = Rental.find_by_id(rental_id)
+
+    @reviews = @rental.reviews
   end
 
 
