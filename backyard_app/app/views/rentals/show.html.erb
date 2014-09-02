@@ -9,7 +9,20 @@
      <p><%= @rental.location %></p>
      <p>$<%= @rental.price %></p>
      <p><%= @rental.description %></p>
-    <div class="col-xs-8 col-sm-4"></div>
+
+
+
+
+     <%= @reviews.each do |review| %>
+     <h3><%= review.description %></h3>
+     <p><%= review.rating %></p>
+     <% end %>
+
+      <%= render partial: "site/nav" %>
+      <!-- not working yet -->
+      <%= button_to "Delete", action: "destroy", method: "delete" %>
+    <div class="col-xs-8 col-sm-4">
+    </div>
   </div>
 
   <!-- add go back button to previous results page  -->
