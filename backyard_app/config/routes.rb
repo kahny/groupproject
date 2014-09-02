@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'passwords/new'
+
   root to: "site#index"
 
   get "/login", to: "session#new"
@@ -23,5 +25,7 @@ Rails.application.routes.draw do
       resources :reviews
       resources :rentals
   end
+
+  resources :passwords
 
 end
