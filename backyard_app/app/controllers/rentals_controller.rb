@@ -59,7 +59,7 @@ class RentalsController < ApplicationController
     @rental = Rental.find_by_id(rental_id)
 
     @reviews = @rental.reviews
-    @reivew = @rental.reviews.new
+    @review = @rental.reviews.new
     @user = current_user
     #find user for nav bar
     @current_user = current_user

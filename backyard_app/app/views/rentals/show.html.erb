@@ -32,6 +32,18 @@
           <input type="submit" value: "Add Review", class="btn btn-danger">
         </div>
       </form>
+
+    <p>This rental has <%= @rental.reviews.length %> reviews</p>
+    <% if @rental.reviews.length > 0 %>
+      <% @rental.reviews.each do |r|%>
+        <% if r.rating != nil %>
+          <h3>Rating: <%= r.rating %> </h3>
+          <h3>Review: <%= r.description %></h3>
+        <% end %>
+      <% end %>
+    <% end %>
+
+
   </div>
 
   <!-- add go back button to previous results page  -->
