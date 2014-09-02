@@ -7,10 +7,11 @@ class RentalsController < ApplicationController
   end
 
   def new
+    user_id = params[:user_id]
     @user = current_user
     @rental = @user.rentals.new
 
-    if User.find(params[:user_id]) != @current_user
+    if User.find(user_id) != @current_user
       redirect_to root_path
     end
   end
