@@ -7,12 +7,9 @@ class ReviewsController < ApplicationController
   		:rating,
   		:description)
   	reviewer = User.find_by_id(params[:user_id])
-  	rental = Rental.find_by_id(params[#TBD])
+  	rental = Rental.find_by_id(params[:id])
 
-
-
-
-
+  	#so we need to figure out how to get the length of reviews
 
 
 
