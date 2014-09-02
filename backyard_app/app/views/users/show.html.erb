@@ -6,5 +6,10 @@
      <img src="<%= @user.image_url %>">
      <p><%= @user.location %></p>
 
+
+     <%= @reviews.each do |review| %>
+     <h3><%= review.description %></h3>
+     <p><%= review.rating %></p>
+     <% end %>
   </div>
 </div>

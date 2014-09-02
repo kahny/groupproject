@@ -10,6 +10,13 @@ class ReviewsController < ApplicationController
 # wondering is this is the correct id or if it should be current user
   	reviewer = User.find_by_id(params[:user_id])
   	rental = Rental.find_by_id(params[:id])
+  	rev_count = rental.reviews.length
+
+  	if rev_count == []
+  		Review.create(new_review)
+  	else
+
+  	end
 
 #so we need to figure out how to get the length of reviews AKA Total reviews of either location or owner
 
