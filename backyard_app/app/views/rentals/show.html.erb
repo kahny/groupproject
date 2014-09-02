@@ -12,14 +12,19 @@
 
 
 
+
     <div class="col-xs-8 col-sm-4">
     </div>
 
     <h2>Add a review</h2>
-      <form action = "/users/<%= @user.id %>/rentals/<%= @rental.id %>/reviews" method="post">
+      <form action = "/users/<%= @rental.user.id %>/rentals/<%= @rental.id %>/reviews" method="post">
         <div class= "form-group">
-          <label>Rating:</label>
+          <!-- hidden input to get current user id  -->
+          <input type="hidden" value="<%= @user.id %>" name="review[user_id]">
+
+          <label>Rating (1-5):</label>
           <input type="range" min="1" max="5" step="1" value="1" name = "review[rating]" autofocus/>
+
           <label>Add a review:</label>
           <textarea rows="5" cols="100" name="review[description]" placeholder="Leave a review"></textarea>
 
