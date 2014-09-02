@@ -12,11 +12,11 @@ class ReviewsController < ApplicationController
   	rental = Rental.find_by_id(params[:id])
   	rev_count = rental.reviews.length
 
-  	if rev_count == []
-  		Review.create(new_review)
-  	else
+  	Review.create(new_review)
 
-  	end
+  		#need to find all reviews with the same either user or rental
+
+
 
 #so we need to figure out how to get the length of reviews AKA Total reviews of either location or owner
 
