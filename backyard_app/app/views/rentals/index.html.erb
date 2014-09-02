@@ -6,7 +6,7 @@
     <div class = "col-xs-12 col-md-4"%>
       <!-- need to add route when models are figured out -->
       <div class="thumbnail">
-        <img class="rentalPic" data-src="holder.js/300x300" src="<%= rental.image_url %>">
+        <img class="rental-pic" data-src="holder.js/300x300" src="<%= rental.image_url %>">
           <div class="caption">
             <p><a href="/users/<%=rental.user_id%>/rentals/<%=rental.id%>"><%= rental.title %></a></p>
             <p>Location: <%= rental.location %> </p>
