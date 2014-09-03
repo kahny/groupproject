@@ -24,6 +24,17 @@ $(document).ready(function(){
       success: function(data){
       	var myLayer = L.mapbox.featureLayer().addTo(map);
 
+
+      	console.log(data);
+      	$("#listings").html("");
+      	// debugger;
+      	var compiledTemplate = HandlebarsTemplates["site/index"]({result: data.features});
+      	console.log(compiledTemplate);
+      	console.log(data.title);
+
+      	$("#listings").append(compiledTemplate);
+
+
       	makeSidebar(data);
 
         myLayer.setGeoJSON(data);
@@ -34,9 +45,12 @@ $(document).ready(function(){
 
 
 
+
       },
       error: function(data) {
       	alert("Error");
+				$("listings").html("<h1>No listings found</h1>")
+
       }
     });
  });
