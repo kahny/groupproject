@@ -69,6 +69,9 @@ class RentalsController < ApplicationController
     #find user for nav bar
     @current_user = current_user
 
+    #create agreement for booking the rental
+    @agreement = Agreement.new
+
   end
 
 

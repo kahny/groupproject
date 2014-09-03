@@ -21,6 +21,19 @@
 
   </div>
 
+  <!-- Rental booking form  -->
+  <div>
+    <%= form_for [@rental, @agreement] do |f| %>
+      <div class="form-group">
+        <%= f.text_field :rent_date %>
+      </div>
+      <div class="form-group">
+        <!-- <input type="text" placeholder="MM/DD/YYYY"/> -->
+        <button type="submit" class="btn btn-danger">Book it!</button>
+      </div>
+    <% end %>
+  </div>
+
    <!-- review count -->
    <div id="reviews-show" class="col-sm-3">
     <% if @rental.reviews.length == 1 %>
