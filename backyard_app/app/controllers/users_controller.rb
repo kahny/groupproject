@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   		:image_url,
   		:isOwner,
   		:location)
-  	user = User.create(new_user)
+  	User.create(new_user)
 
   	redirect_to root_path
   end

@@ -2,7 +2,19 @@
 <%= render partial: "header" %>
 
 
-<div id='map-two' class='map'> </div>
+	<div class="row">
+		<div class="fixed">
+			<div id="map-container" class="col-xs-12 col-sm-5 col-sm-offset-1">
+				<div id='map-two' class='map'>
+				</div>
+			</div>
+		</div>
+
+		<div class=" col-sm-5  ">
+			<div id="listings"></div>
+		</div>
+	</div>
+
 
 
 <script>
@@ -12,23 +24,6 @@ var map = L.mapbox.map('map-two', 'davidjavate.jd8jfekm', {
 }).setView([37.7833,-122.4167], 10);
 
 
-map.featureLayer.on('ready', function(e) {
-    var markers = [];
-    this.eachLayer(function(marker) { markers.push(marker); });
-    cycle(markers);
-});
-
-function cycle(markers) {
-    var i = 0;
-    function run() {
-        if (++i > markers.length - 1) i = 0;
-        map.setView(markers[i].getLatLng(), 12);
-        markers[i].openPopup();
-        window.setTimeout(run, 3000);
-    }
-    run();
-}
 
 var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
 </script>
-
