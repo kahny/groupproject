@@ -37,10 +37,13 @@ class SiteController < ApplicationController
         },
         properties: {
           address: location.location,
-          :'marker-color' => '#00607d',
+          :'marker-color'  => '#00607d',
           :'marker-symbol' => 'circle',
-          :'marker-size' => 'medium',
-          url:  user_rental_path(location.user_id, location.id)
+          :'marker-size'   => 'medium',
+          url:  user_rental_path(location.user_id, location.id),
+          title: location.title,
+          description: location.description,
+          price: location.price
         }
       }
     end
