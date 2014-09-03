@@ -1,8 +1,16 @@
 <%= render partial: "site/nav", locals: { user: @user }  %>
 
+<!-- renter information -->
+<div class="row" id="renter-name">
+  <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+      <h3><%= @renter.first_name %> <%= @renter.last_name %></h3>
+
+  </div>
+</div>
+
+
 <!-- display rental information -->
 <div class="row">
-
   <div class="col-xs-12 col-sm-5 col-sm-offset-1">
      <h1><%= @rental.title %></h1>
      <img src="<%= @rental.image_url %>">
@@ -11,14 +19,18 @@
      <p><%= @rental.description %></p>
   </div>
 
-   <!-- review form -->
+   <!-- review count -->
    <div class="col-sm-3">
+    <% if @rental.reviews.length == 1 %>
+    <p><%= @rental.reviews.length %> person has reviewed this backyard</p>
+    <% else %>
+    <p><%= @rental.reviews.length %> people have reviewed this backyard </p>
+  <% end %>
+
+    <!-- review form -->
     <a href="javascript:void(0);" id="review-button"><h4>Add a review</h4></a>
       <form id="rental-review" action="/users/<%= @rental.user.id %>/rentals/<%= @rental.id %>/reviews" method="post">
         <div class= "form-group">
-          <!-- hidden input to get current user id  -->
-         <!--  <input type="hidden" value="<%= @user.id %>" name="review[user_id]" id="user-val"> -->
-
           <label>Rating (1-5):</label>
           <input type="range" min="1" max="5" step="1" value="1" name="review[rating]" id="rating-val" autofocus/><br>
 
@@ -30,25 +42,16 @@
         </div>
       </form>
 
-    <!-- review display -->
-    <div id="review-container">
-
-
-    </div>
-
-    <% if @rental.reviews.length == 1 %>
-      <p>This backyard has <%= @rental.reviews.length %> review</p>
-      <% else %>
-      <p>This backyard has <%= @rental.reviews.length %> reviews</p>
-      <% end %>
-        <% if @rental.reviews.length > 0 %>
-          <% @rental.reviews.each do |r|%>
-            <% if r.rating != nil %>
-              <h3>Rating: <%= r.rating %> </h3>
-              <h3>Review: <%= r.description %></h3>
+        <!-- review display -->
+        <div id="review-display">
+            <% if @rental.reviews.length > 0 %>
+            <% @rental.reviews.each do |review|%>
+              <% if review.description != nil %>
+                <p><%= review.description %></p>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        </div>
 
    </div>
 

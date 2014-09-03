@@ -58,6 +58,9 @@ class RentalsController < ApplicationController
     rental_id = params[:id]
     @rental = Rental.find_by_id(rental_id)
 
+    #creating variable renter to bring renter info to page
+    @renter = @rental.user
+
     @reviews = @rental.reviews
     @review = @rental.reviews.new
     @user = current_user

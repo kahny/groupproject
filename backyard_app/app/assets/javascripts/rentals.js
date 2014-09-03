@@ -21,9 +21,12 @@ $(document).ready(function() {
       data: {review: {user: user, rating: rating, description: description}},
       success: function(data) {
         console.log("Success with data!", data);
-        $("#review-container").append(
-          data.rating,
+
+        // append new review to page
+        $("#review-display").append(
           data.description);
+
+        // reset form values
         $("#rating-val").val(1);
         $("#description-val").val("");
       },
