@@ -5,13 +5,6 @@
 
 $(document).ready(function(){
 
-	var makeSidebar = function(data){
-		var features = data.features
-		for (i = 0; i <= features.length; i += 1) {
-
-		}
-
-	};
 
  $("#search-bar").on('submit', function(e){
  	var value = $(".searchval").val();
@@ -35,14 +28,29 @@ $(document).ready(function(){
       	$("#listings").append(compiledTemplate);
 
 
-      	makeSidebar(data);
-
         myLayer.setGeoJSON(data);
         myLayer.on('click', function(e) {
           e.layer.unbindPopup();
-          window.location.href=e.layer.feature.properties.url;
+          // for making marker a link
+          // window.location.href=e.layer.feature.properties.url;
         });
 
+				// map.featureLayer.on('ready', function(e) {
+				//     var markers = [];
+				//     this.eachLayer(function(marker) { markers.push(marker); });
+				//     cycle(markers);
+				// });
+
+				// function cycle(markers) {
+				//     var i = 0;
+				//     function run() {
+				//         if (++i > markers.length - 1) i = 0;
+				//         map.setView(markers[i].getLatLng(), 12);
+				//         markers[i].openPopup();
+				//         window.setTimeout(run, 3000);
+				//     }
+				//     run();
+				// }
 
 
 
