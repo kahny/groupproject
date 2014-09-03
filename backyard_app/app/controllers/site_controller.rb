@@ -21,8 +21,6 @@ class SiteController < ApplicationController
     end
 
     @locations = Rental.near(location_arr, 30)
-    # Loop through each
-    p @locations
 
 
     @features = Array.new

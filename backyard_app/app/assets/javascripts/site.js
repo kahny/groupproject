@@ -6,13 +6,15 @@
 
 $(document).ready(function(){
 
-	var makeSidebar = function(data){
-		var features = data.features
-		for (i = 0; i <= features.length; i += 1) {
+	// need to figure out handlebars for appending the results
 
-		}
+	// var makeSidebar = function(data){
+	// 	var features = data.features
+	// 	for (i = 0; i <= features.length; i += 1) {
 
-	};
+	// 	}
+
+	// };
 
  $("#search-bar").on('submit', function(e){
  	var value = $(".searchval").val();
@@ -37,7 +39,7 @@ $(document).ready(function(){
 
       },
       error: function(data) {
-      	alert("Error");
+      	console.log("DOH!");
       }
     });
  });
