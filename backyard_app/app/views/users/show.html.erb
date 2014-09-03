@@ -8,7 +8,11 @@
 
   <div class="col-md-6">
       <!-- individual user page -->
-     <h1>Hello, <%= @user.first_name %> <%= @user.last_name %> !</h1>
+      <% if @current_user = @user %>
+      <h1>Hello,<%= @current_user.first_name %> <%= @current_user.last_name %> !</h1>
+      <% else %>
+     <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+     <% end %>
 
 
 
@@ -20,17 +24,20 @@
 
 <div class ="row">
   <div class="col-md-8">
-  <h2>Add a review</h2>
-      <form action = "/users/<%= @user.id %>/reviews" method="post">
+  <h2><%= @user.first_name %> <%= @user.last_name %> has <%= @user.reviews.length %> reviews</h2>
+  <a href="javascript:void(0);" id ="userreview-button">
+
+  <h2>Add a review</h2></a>
+      <form id = "user-review" action = "/users/<%= @user.id %>/reviews" method="post">
         <div class= "form-group">
           <!-- hidden input to get current user id  -->
           <input type="hidden" value="<%= @user.id %>" name="review[user_id]">
 
           <label>Rating (1-5):</label>
-          <input type="range" min="1" max="5" step="1" value="1" name = "review[rating]" autofocus/>
+          <input type="range" min="1" max="5" step="1" value="1" name = "review[rating]" id="rating-val" autofocus/><br>
 
           <label>Add a review:</label>
-          <textarea rows="5" cols="100" name="review[description]" placeholder="Leave a review"></textarea>
+          <textarea rows="5" cols="100" name="review[description]" id="description-val" placeholder="Leave a review"></textarea>
 
           <%= token_tag form_authenticity_token %>
           <input type="submit" value: "Add Review", class="btn btn-danger">
@@ -38,24 +45,23 @@
       </form>
     </div>
 
-  <div class="col-md-8">
-    <p><%= @user.first_name %> <%= @user.last_name %> has <%= @user.reviews.length %> reviews</p>
+  <div id ="userreview-display" class="col-md-8">
+
     <% if @user.reviews.length > 0 %>
       <% @user.reviews.each do |r|%>
         <% if r.rating != nil %>
-          <h3>Rating: <%= r.rating %> </h3>
-          <h3>Review: <%= r.description %></h3>
+          <h4>Rating: <%= r.rating %> </h4>
+          <h4>Review: <%= r.description %></h4>
         <% end %>
       <% end %>
     <% end %>
 
 
+
+
   </div>
 
-  <%= @reviews.each do |review| %>
-     <h3><%= review.description %></h3>
-     <p><%= review.rating %></p>
-     <% end %>
+
 
   </div>
   </div>

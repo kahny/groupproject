@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   # this might not be necessary
   get "/rentals",   to: "rentals#index", as: "browse"
-
+  get "/rentals",   to: "rentals#index", as: "rentals"
   get "/about",     to: "site#about", as: "about"
 
   get "/contact",   to: "site#contact", as: "contact"

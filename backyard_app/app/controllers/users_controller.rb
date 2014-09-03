@@ -54,9 +54,9 @@ class UsersController < ApplicationController
     user_id = params[:id]
     @user = User.find_by_id(user_id)
 
-    @reviews = @user.reviews
-    @review = @user.reviews.new
-    @user = current_user
+    @user_reviews = @user.reviews || []
+    @new_user_review = @user.reviews.new
+
     #find user for nav bar
     @current_user = current_user
   end
