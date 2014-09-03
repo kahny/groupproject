@@ -11,31 +11,31 @@ $(document).ready(function() {
 
     var rating = $("#rating-val").val();
     var description = $("#description-val").val();
+    var user = $("#user-val").val();
     var formURL = $(this).attr('action');
 
+    function reviewsToPage() {
+      $.ajax({
+      type: 'POST',
+      url: formURL,
+      data: {review: {user: user, rating: rating, description: description}},
+      success: function(data) {
+        console.log("Success with data!", data);
+        $("#review-container").append(
+          data.rating,
+          data.description);
+        $("#rating-val").val(1);
+        $("#description-val").val("");
+      },
+      error: function(data) {
+        console.log("ERROR");
+      }
+    }); //closing AJAX
+    } //closing function reviewsToPage
 
-    function testAjax() {
-      console.log(rating);
-      console.log(description);
-      console.log(formURL);
-        $.ajax({
-        type: 'POST',
-        url: formURL,
-        data: {review: {rating: rating, description: description}},
-        success: function(data) {
-          console.log("Success with data!", data);
-        },
-        error: function(data) {
-          console.log("ERROR ");
-        }
-      }); //closing AJAX
-    }
-
-    testAjax();
-
-  }); //closing onsubmit
+    reviewsToPage();
+  }); //closing on submit
 
 
-  // ajax: append review body to page.
 
 }); //closing all

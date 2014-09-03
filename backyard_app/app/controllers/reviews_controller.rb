@@ -6,9 +6,10 @@ class ReviewsController < ApplicationController
     #so we need to figure out how to get the length of reviews AKA Total reviews of either location or owner
     #also how to set up the relations between ratings
 
-    @user = User.find_by_id(params[:user_id])
+    review_params = params[:review].permit(:rating, :description)
+    review_params[:user_id] = current_user.id
+    # @user = User.find_by_id(review_params[:user_id])
     @rental = Rental.find_by_id(params[:rental_id])
-    review_params = params[:review].permit(:user_id, :rating, :description)
     @review = @rental.reviews.create(review_params)
 
     render :json => @review

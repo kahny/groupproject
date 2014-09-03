@@ -17,7 +17,7 @@
       <form id="rental-review" action="/users/<%= @rental.user.id %>/rentals/<%= @rental.id %>/reviews" method="post">
         <div class= "form-group">
           <!-- hidden input to get current user id  -->
-          <input type="hidden" value="<%= @user.id %>" name="review[user_id]">
+         <!--  <input type="hidden" value="<%= @user.id %>" name="review[user_id]" id="user-val"> -->
 
           <label>Rating (1-5):</label>
           <input type="range" min="1" max="5" step="1" value="1" name="review[rating]" id="rating-val" autofocus/><br>
@@ -31,6 +31,11 @@
       </form>
 
     <!-- review display -->
+    <div id="review-container">
+
+
+    </div>
+
     <% if @rental.reviews.length == 1 %>
       <p>This backyard has <%= @rental.reviews.length %> review</p>
       <% else %>
