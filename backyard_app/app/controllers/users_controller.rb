@@ -56,8 +56,9 @@ class UsersController < ApplicationController
 
     @reviews = @user.reviews
     @review = @user.reviews.new
-    @user = current_user
     #find user for nav bar
     @current_user = current_user
+    @agreement = Agreement
+    @rental = @user.rentals
   end
 end
