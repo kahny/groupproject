@@ -15,6 +15,11 @@
   <h1>Your current rentals </h1>
   <h1>Your past rentals </h1>
 
+  <% @owners_agreements.each do |agreement| %>
+    <p><%= agreement.rental_id  %></p>
+  <% end %>
+
+
 
 
   </div>

@@ -58,7 +58,8 @@ class UsersController < ApplicationController
     @review = @user.reviews.new
     #find user for nav bar
     @current_user = current_user
-    @agreement = Agreement
+    rental_ids = @user.rentals.map(&:id)
+    @owners_agreements = Agreement.where(rental_id: rental_ids)
     @rental = @user.rentals
   end
 end
