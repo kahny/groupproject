@@ -10,10 +10,12 @@
         <div class="crop-height">
           <img class="rental-pic" data-src="holder.js/300x300" src="<%= rental.image_url %>">
         </div>
+        <div class="post-content">
+          <p>$ <%= rental.price %> </p>
+        </div>
         <div class="caption">
           <p><a href="/users/<%=rental.user_id%>/rentals/<%=rental.id%>"><%= rental.title %></a></p>
           <p>Location: <%= rental.location %> </p>
-          <p>$ <%= rental.price %> </p>
         </div>
       </div>
     </div>
