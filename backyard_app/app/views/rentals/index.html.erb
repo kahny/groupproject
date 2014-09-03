@@ -14,13 +14,24 @@
         <div class="price-on-rental">
           <p>$ <%= rental.price %> </p>
         </div>
+
       <!--todo: edit in css instead of using breaks -->
-      <br><br><br>
-          <div class="caption">
-            <p><a href="/users/<%=rental.user_id%>/rentals/<%=rental.id%>"><%= rental.title %></a></p>
-            <p>Location: <%= rental.location %> </p>
+      <br>
+
+      <!-- form to submit date to rent  -->
+      <!-- add form for @agreement erb here -->
+          <div class="form-group">
+            <input type="text" placeholder="MM/DD/YYYY"/>
+            <button type="submit" class="btn btn-danger">Book it!</button>
           </div>
-          <div>
+
+        <div class="caption">
+          <br><br>
+          <p><a href="/users/<%=rental.user_id%>/rentals/<%=rental.id%>"><%= rental.title %></a></p>
+          <p>Location: <%= rental.location %> </p>
+        </div>
+
+        <div>
           <img class="user-pic-on-rental-pic" data-src="holder.js/300x300" src="<%= rental.user.image_url %>" border="5"/>
         </div>
 
