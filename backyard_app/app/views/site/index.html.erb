@@ -9,14 +9,26 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
 var map = L.mapbox.map('map-two', 'davidjavate.jd8jfekm', {
   scrollWheelZoom: false
-}).setView([37.7833,-122.4167], 12);
+}).setView([37.7833,-122.4167], 10);
+
+
+map.featureLayer.on('ready', function(e) {
+    var markers = [];
+    this.eachLayer(function(marker) { markers.push(marker); });
+    cycle(markers);
+});
+
+function cycle(markers) {
+    var i = 0;
+    function run() {
+        if (++i > markers.length - 1) i = 0;
+        map.setView(markers[i].getLatLng(), 12);
+        markers[i].openPopup();
+        window.setTimeout(run, 3000);
+    }
+    run();
+}
 
 var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
-
-
 </script>
-
-
-
-
 
