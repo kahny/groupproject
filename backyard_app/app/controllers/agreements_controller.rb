@@ -6,6 +6,7 @@ class AgreementsController < ApplicationController
 		@agreement.rental_id = params[:rental_id]
 		@agreement.user_id = current_user.id
 		@agreement.save
+		redirect_to root_path
 	end
 
 end

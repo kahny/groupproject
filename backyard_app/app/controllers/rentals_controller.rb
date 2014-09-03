@@ -7,6 +7,8 @@ class RentalsController < ApplicationController
 
     #find user for nav bar
     @current_user = current_user
+
+    @agreement = Agreement.new
   end
 
   def new
