@@ -3,18 +3,27 @@
 
 <div class="row">
   <%= @rentals.each do |rental| %>
-    <div class = "col-xs-6 col-md-4"%>
+    <div class = "col-xs-6 col-md-4">
       <!-- need to add route when models are figured out -->
       <div class="thumbnail">
 
-        <div class="crop-height">
-          <img class="rental-pic" data-src="holder.js/300x300" src="<%= rental.image_url %>">
+        <div class="crop-height" style="position: relative; left: 0; top: 0;">
+          <img class="rental-pic" data-src="holder.js/300x300" src="<%= rental.image_url %>" style="position: relative; top: 0; left: 0;">
         </div>
-        <div class="caption">
-          <p><a href="/users/<%=rental.user_id%>/rentals/<%=rental.id%>"><%= rental.title %></a></p>
-          <p>Location: <%= rental.location %> </p>
+
+        <div class="price-on-rental">
           <p>$ <%= rental.price %> </p>
         </div>
+      <!--todo: edit in css instead of using breaks -->
+      <br><br><br>
+          <div class="caption">
+            <p><a href="/users/<%=rental.user_id%>/rentals/<%=rental.id%>"><%= rental.title %></a></p>
+            <p>Location: <%= rental.location %> </p>
+          </div>
+          <div>
+          <img class="user-pic-on-rental-pic" data-src="holder.js/300x300" src="<%= rental.user.image_url %>" border="5"/>
+        </div>
+
       </div>
     </div>
   <% end %>
