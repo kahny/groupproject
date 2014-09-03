@@ -1,12 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Lobster:400normal);
 @import url(http://fonts.googleapis.com/css?family=Arimo:400normal);
 
+
+/* backyard owner information */
 #renter-name {
   height: 300px;
   background-color: rgb(101, 193, 143);
   margin-bottom: 30px;
   font-family: 'Arimo', sans-serif;
-
 }
 
 #user-pic {
@@ -18,4 +19,16 @@
 
 #reviews-show {
   margin-top: 100px;
+}
+
+/* backyard information */
+
+#rental-pic {
+  max-width: 500px;
+}
+
+#rental-show {
+  margin-top: 30px;
+  height: 300px;
+  width: 500px;
 }
