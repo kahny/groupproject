@@ -7,16 +7,24 @@
       <!-- need to add route when models are figured out -->
       <div class="thumbnail">
 
-        <div class="crop-height">
-          <img class="rental-pic" data-src="holder.js/300x300" src="<%= rental.image_url %>">
+        <div class="crop-height" style="position: relative; left: 0; top: 0;">
+          <img class="rental-pic" data-src="holder.js/300x300" src="<%= rental.image_url %>" style="position: relative; top: 0; left: 0;">
+          <img class="user-pic-on-rental-pic" data-src="holder.js/300x300" src="<%= rental.user.image_url %>" />
         </div>
-        <div class="post-content">
+
+     <!--    <div class="pic-on-rental">
+          <img class="user-pic-on-rental" data-src="holder.js/300x300" src="<%= rental.user.image_url %>">
+        </div>
+ -->
+        <div class="price-on-rental">
           <p>$ <%= rental.price %> </p>
         </div>
+
         <div class="caption">
           <p><a href="/users/<%=rental.user_id%>/rentals/<%=rental.id%>"><%= rental.title %></a></p>
           <p>Location: <%= rental.location %> </p>
         </div>
+
       </div>
     </div>
   <% end %>
