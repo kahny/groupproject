@@ -12,11 +12,11 @@ class SiteController < ApplicationController
   	# loc = params.require(:search)
     loc = params[:search]
 
-    lat_long = Geocoder.coordinates(loc)
+    @lat_long = Geocoder.coordinates(loc)
 
     location_arr = []
 
-    lat_long.each do |location|
+    @lat_long.each do |location|
       location_arr << location
     end
 
@@ -39,8 +39,8 @@ class SiteController < ApplicationController
           address: location.location,
           :'marker-color' => '#00607d',
           :'marker-symbol' => 'circle',
-          :'marker-size' => 'medium'
-          # url: user_rental_path(location)
+          :'marker-size' => 'medium',
+          url:  user_rental_path(location.user_id, location.id)
         }
       }
     end
