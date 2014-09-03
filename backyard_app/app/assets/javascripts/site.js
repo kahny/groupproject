@@ -17,6 +17,15 @@ $(document).ready(function(){
       url: "/search",
       data: { search: value},
       success: function(data){
+      	var myLayer = L.mapbox.featureLayer().addTo(map);
+
+
+myLayer.setGeoJSON(@geojson %>);
+myLayer.on('click', function(e) {
+    e.layer.unbindPopup();
+    window.location.href=e.layer.feature.properties.url;
+});
+
       },
       error: function(data) {
       	alert("Error");
