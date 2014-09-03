@@ -4,8 +4,29 @@
 
 .map { position:absolute; width:50%; }
   #map-two {
-/*  position-top: -4em;*/
-	width: 50%;
-	height: 50%;
+  position: fixed;
+  top: 490px;
+	left: 20px;
+  float: right;
+	width: 600px;
+	height: 600px;
 }
 
+/*.fixed {
+	position: fixed;
+	top: 550px;
+	left: 20px;
+	width: 33%;
+
+}*/
+/*
+.siteheader {
+	position: fixed;
+}
+
+#listings {
+	  top: 550px;
+}
+
+
+*/
