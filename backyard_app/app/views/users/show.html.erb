@@ -10,13 +10,18 @@
     <!-- individual user page -->
    <h1>Hello, <%= @user.first_name %> <%= @user.last_name %> !</h1>
 
-  <h1>You have 0 rentals</h1>
-  <h1>You have 0 rentals pending approval </h1>
-  <h1>Your current rentals </h1>
-  <h1>Your past rentals </h1>
+  <h1>You have <%= @owners_agreements.length %> pending rentals</h1>
 
   <% @owners_agreements.each do |agreement| %>
-    <p><%= agreement.rental_id  %></p>
+    <% agreementid = agreement.rental_id %>
+    <% rental = Rental.find_by_id(agreementid)%>
+
+    <% renterid = agreement.user_id %>
+    <% user = User.find_by_id(renterid) %>
+
+    <p>This is the rental: <%= rental.title %></p>
+    <p>This is the user name: <%= user.first_name %></p>
+    <p>This is the user url: <a href="/users/<%= renterid %>"><%= user.first_name %> </a></p>
   <% end %>
 
 

@@ -60,6 +60,10 @@ class UsersController < ApplicationController
     @current_user = current_user
     rental_ids = @user.rentals.map(&:id)
     @owners_agreements = Agreement.where(rental_id: rental_ids)
-    @rental = @user.rentals
+
+
+    # @renter_id = @owner_agreements.user_id
+
+    # rental_found = Rental.find_by_id()
   end
 end
