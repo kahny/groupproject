@@ -7,10 +7,11 @@ $(document).ready(function(){
 
  $("#search-bar").on('submit', function(e){
  	var value = $(".searchval").val();
+  e.preventDefault();
 
  	$(".leaflet-marker-pane img").remove();
- 	e.preventDefault();
- 	$.ajax({
+
+  $.ajax({
  			// datatype: "html",
       url: "/search",
       data: { search: value},
