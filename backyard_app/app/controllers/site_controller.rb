@@ -16,14 +16,46 @@ class SiteController < ApplicationController
 
     location_arr = []
 
-    lat_long.map do |location|
+    lat_long.each do |location|
       location_arr << location
     end
 
     @locations = Rental.near(location_arr, 30)
     # Loop through each
     p @locations
-    render nothing: true
+
+
+    @features = Array.new
+
+    #Go through locations db and push into features array
+    @locations.each do |location|
+      @features << {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [location.longitude, location.latitude]
+        },
+        properties: {
+          address: location.location,
+          :'marker-color' => '#00607d',
+          :'marker-symbol' => 'circle',
+          :'marker-size' => 'medium'
+          # url: user_rental_path(location)
+        }
+      }
+    end
+
+    p @features
+
+    #Add features array to @geojson to yield markers
+    @geojson = JSON.generate({
+      type: 'FeatureCollection',
+      features: @features
+    })
+
+    p @geojson
+
+    render json: @geojson
   end
 
   def about
