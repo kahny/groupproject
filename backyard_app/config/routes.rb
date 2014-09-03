@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root to: "site#index"
 
-  get "/search",         to: "site#search", as: "search"
+  get "/search",    to: "site#search", as: "search"
 
   get "/login",     to: "session#new"
 

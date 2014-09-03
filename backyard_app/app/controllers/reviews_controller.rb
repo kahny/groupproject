@@ -11,6 +11,8 @@ class ReviewsController < ApplicationController
     review_params = params[:review].permit(:user_id, :rating, :description)
     @review = @rental.reviews.create(review_params)
 
+    render :json => @review
+
     #Alli: commented this out, now using AJAX
     # redirect_to "/users/#{@rental.user.id}/rentals/#{@rental.id}"
   end

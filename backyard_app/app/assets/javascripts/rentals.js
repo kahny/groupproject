@@ -3,12 +3,38 @@ $(document).ready(function() {
   $("#rental-review").hide();
 
   $("#review-button").click(function() {
-    $("#rental-review").show();
+    $("#rental-review").toggle();
   });
 
+  $("#rental-review").on('submit', function(e) {
+    e.preventDefault();
+
+    var rating = $("#rating-val").val();
+    var description = $("#description-val").val();
+    var formURL = $(this).attr('action');
 
 
-  // onclick for "Leave a comment" make form appear
+    function testAjax() {
+      console.log(rating);
+      console.log(description);
+      console.log(formURL);
+        $.ajax({
+        type: 'POST',
+        url: formURL,
+        data: {review: {rating: rating, description: description}},
+        success: function(data) {
+          console.log("Success with data!", data);
+        },
+        error: function(data) {
+          console.log("ERROR ");
+        }
+      }); //closing AJAX
+    }
+
+    testAjax();
+
+  }); //closing onsubmit
+
 
   // ajax: append review body to page.
 
