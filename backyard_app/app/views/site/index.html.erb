@@ -2,6 +2,18 @@
 <%= render partial: "header" %>
 
 
+<div id='map-two' class='map'> </div>
+
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
+var map = L.mapbox.map('map-two', 'davidjavate.jd8jfekm', {
+    scrollWheelZoom: false
+}).setView([37.7833,-122.4167], 14);
+
+
+</script>
+
 
 
 
