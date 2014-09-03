@@ -1,8 +1,7 @@
 {{#each result}}
-	<h1><a href="{{properties.url}}"> {{properties.title}} </a></h1>
-	<h3> {{properties.address}} </h3>
-	<p> {{properties.description}} </p>
-	<h3> {{properties.price}} </h3>
-	<img src="{{properties.image_url}}">
+	<h3><a href="{{properties.url}}"> {{properties.title}} </a></h3>
+	<p> {{properties.address}} </p>
+	<p> {{properties.price}} </p>
+	<img class="crop-height" src="{{properties.image_url}}">
 
 {{/each}}

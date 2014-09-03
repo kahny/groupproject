@@ -40,7 +40,7 @@ class SiteController < ApplicationController
           description: location.description,
           price: location.price,
           image_url: location.image_url,
-          :'marker-color'  => '#00607d',
+          :'marker-color'  => '65C18F',
           :'marker-symbol' => 'circle',
           :'marker-size'   => 'medium'
         }
