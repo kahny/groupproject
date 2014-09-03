@@ -1,50 +1,60 @@
 <%= render partial: "site/nav", locals: { user: @user }  %>
 
-<div class="row">
+<!-- renter information -->
+<div class="row" id="renter-name">
+  <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+      <img id="user-pic" src="<%= @renter.image_url %>">
+      <h3><%= @renter.first_name %> <%= @renter.last_name %></h3>
 
-  <div class="col-xs-8 col-sm-4"></div>
-  <div class="col-xs-8 col-sm-4">
+  </div>
+</div>
+
+
+<!-- display rental information -->
+<div class="row">
+  <div class="col-xs-12 col-sm-5 col-sm-offset-1">
      <h1><%= @rental.title %></h1>
-     <img src="<%= @rental.image_url %>">
-     <p><%= @rental.location %></p>
+     <p>Address: <%= @rental.location %></p>
      <p>$<%= @rental.price %></p>
      <p><%= @rental.description %></p>
+     <img src="<%= @rental.image_url %>">
 
+  </div>
 
+   <!-- review count -->
+   <div id="reviews-show" class="col-sm-3">
+    <% if @rental.reviews.length == 1 %>
+    <p><%= @rental.reviews.length %> person has reviewed this backyard</p>
+    <% else %>
+    <p><%= @rental.reviews.length %> people have reviewed this backyard </p>
+  <% end %>
 
-
-    <div class="col-xs-8 col-sm-4">
-    </div>
-
-    <h2>Add a review</h2>
-      <form action = "/users/<%= @rental.user.id %>/rentals/<%= @rental.id %>/reviews" method="post">
+    <!-- review form -->
+    <a href="javascript:void(0);" id="review-button"><h4>Add a review</h4></a>
+      <form id="rental-review" action="/users/<%= @rental.user.id %>/rentals/<%= @rental.id %>/reviews" method="post">
         <div class= "form-group">
-          <!-- hidden input to get current user id  -->
-          <input type="hidden" value="<%= @user.id %>" name="review[user_id]">
-
           <label>Rating (1-5):</label>
-          <input type="range" min="1" max="5" step="1" value="1" name = "review[rating]" autofocus/>
+          <input type="range" min="1" max="5" step="1" value="1" name="review[rating]" id="rating-val" autofocus/><br>
 
           <label>Add a review:</label>
-          <textarea rows="5" cols="100" name="review[description]" placeholder="Leave a review"></textarea>
+          <textarea rows="5" cols="75" name="review[description]" id="description-val" placeholder="Leave a review"></textarea>
 
           <%= token_tag form_authenticity_token %>
           <input type="submit" value: "Add Review", class="btn btn-danger">
         </div>
       </form>
 
-    <p>This rental has <%= @rental.reviews.length %> reviews</p>
-    <% if @rental.reviews.length > 0 %>
-      <% @rental.reviews.each do |r|%>
-        <% if r.rating != nil %>
-          <h3>Rating: <%= r.rating %> </h3>
-          <h3>Review: <%= r.description %></h3>
-        <% end %>
-      <% end %>
-    <% end %>
+        <!-- review display -->
+        <div id="review-display">
+            <% if @rental.reviews.length > 0 %>
+            <% @rental.reviews.each do |review|%>
+              <% if review.description != nil %>
+                <p><%= review.description %></p>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
 
+   </div>
 
-  </div>
-
-  <!-- add go back button to previous results page  -->
 </div>

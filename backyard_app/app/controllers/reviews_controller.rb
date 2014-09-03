@@ -3,19 +3,17 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    #so we need to figure out how to get the length of reviews AKA Total reviews of either location or owner
+    review_params = params[:review].permit(:rating, :description)
+    review_params[:user_id] = current_user.id
 
-    #also how to set up the relations between ratings
-    # @current_user = current_user
-    @user = User.find_by_id(params[:user_id])
     @rental = Rental.find_by_id(params[:rental_id])
-    review_params = params[:review].permit(:user_id, :rating, :description)
     @review = @rental.reviews.create(review_params)
-    redirect_to "/users/#{@rental.user.id}/rentals/#{@rental.id}"
+
+    #sending json back to ajax call
+    render :json => @review
   end
 
   def show
-
   end
 
 end
