@@ -78,6 +78,28 @@
       <% end %>
       </div>
 
+      <!-- APPROVED REQUESTS -->
+      <div class="approved-requests">
+      <% if @owners_approved_agreements.length > 0 %>
+        <h5>Upcoming Visits:</h5>
+         <% @owners_approved_agreements.each do |agreement| %>
+            <!-- setting variables -->
+            <% agreementid = agreement.rental_id %>
+            <% rental = Rental.find_by_id(agreementid) %>
+
+            <% renterid = agreement.user_id %>
+            <% user = User.find_by_id(renterid) %>
+            <!-- REQUESTER INFORMATION -->
+            <div class="single-request">
+              <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
+              <p>Date: <%= agreement.rent_date %></p>
+            </div>
+          <!-- end each do block -->
+        <% end %>
+        <!-- end if @owners_agreements.length -->
+      <% end %>
+      </div>
+
     <!-- REVIEWS -->
     <!-- ONLY VISIBLE TO CURRENT USER -->
     <div class="col-sm-5 col-sm-offset-1">
