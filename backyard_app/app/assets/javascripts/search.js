@@ -10,7 +10,7 @@ $(function(){
 	  var value = $(".searchval").val();
 
 	 	$(".leaflet-marker-pane img").remove();
-	 	listingCall(value)
+	 	listingCall(value);
   });
 
   var listingCall = function(value){
@@ -53,4 +53,8 @@ $(function(){
 	      }
 	    });
 		};
- });
+
+		if (result) {
+			listingCall(result);
+		}
+});

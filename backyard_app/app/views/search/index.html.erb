@@ -1,8 +1,9 @@
-<%= render partial: "site/nav", locals: { user: @user } %>
+<%= render partial: "fixedheader", locals: { user: @user } %>
 
 
 
-	<div class="row">
+	<div class="row main-content">
+
 		<div class="fixed">
 			<div id="map-container" class="col-xs-12 col-sm-5">
 				<div id='map'>
@@ -10,8 +11,8 @@
 			</div>
 		</div>
 
-<div id="map-container" class="col-xs-12 col-sm-7">
-  <div class="container">
+<div class="col-xs-12 col-sm-7">
+  <div id="results-container" class="container">
       <%= form_for @search, method: :get, url: '/search/new', html: {id: 'search-bar'} do |f| %>
         <div class="form-group">
 
@@ -41,6 +42,7 @@ map.setView([37.7833,-122.4167], 12);
 
 console.log($(".container"));
 
+var result = '<%= @search_result %>'
 
 var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
 </script>

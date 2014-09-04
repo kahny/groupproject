@@ -4,6 +4,10 @@ class SearchController < ApplicationController
     @current_user = current_user
 
     @search = ""
+
+    @search_result = params[:search]
+
+    p @search_result
   end
 
   def new
