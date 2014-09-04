@@ -187,18 +187,21 @@
       <!-- RENTAL DISPLAY -->
         <div id="rental-listing">
           <a href="/users/<%= @user.id%>/rentals/<%= @user.rentals[0].id %>"><h3><%= @user.rentals[0].title %></h3></a>
-            <p><strong>About this backyard:</strong></p>
+            <h5><strong>About this backyard:</strong></h5>
             <p><%= @user.rentals[0].description %></p>
+
+            <h5><strong>Rent it for a day! </strong></h5>
+            <p>$<%= @user.rentals[0].price %></p>
+
             <img src="<%= @user.rentals[0].image_url %>" id="rental-pic"><br>
 
-            <p><strong>Rent it for the day: </strong></p>
-            <p>$<%= @user.rentals[0].price %></p>
+
         </div>
       </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-sm-offset-1" id="userreview-all">
     <!-- USER REVIEW FORM -->
-       <p> Have you visited <%= @user.first_name %>? <a href="javascript:void(0);" id ="userreview-button">Leave a review</a></p>
+       <h4> Have you visited <%= @user.first_name %>'s? <a href="javascript:void(0);" id ="userreview-button">Leave a review</a></h4>
           <form id="user-review" action="/users/<%= @user.id %>/reviews" method="post">
 
               <div class= "form-group">
@@ -216,11 +219,11 @@
 
         <!-- REVIEWS DISPLAY -->
         <% if @user.reviews.length > 0 %>
-          <h3>Reviews (<%= @user.reviews.length %>)</h3>
+          <h5>Reviews (<%= @user.reviews.length %>)</h5>
           <% @user.reviews.each do |review| %>
             <% if review.description != nil %>
               <div id="userreview-display">
-                <span><img src="https://cdn0.iconfinder.com/data/icons/octicons/1024/heart-24.png"></span> <%= review.description %><br>
+                <span><img src="https://cdn1.iconfinder.com/data/icons/humano2/24x24/actions/bookmark-new.png"></span> <%= review.description %><br>
               </div>
             <% end %>
         <% end %>
