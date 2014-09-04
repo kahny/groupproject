@@ -1,17 +1,32 @@
 $(document).ready(function() {
 
   // approve renters!
-  // $("#approval-button").on('click', function(e) {
-  //   e.preventDefault();
+  $(".approval-form").on('click', "input", function(e) {
+    e.preventDefault();
+    $(this).hide();
 
-  //   var url = $(this).attr('action');
-  //   var approve = $(this).attr('data-value');
+    var agreementURL = $(this).parent().attr('action');
+    var status = this.name;
 
-  //   $.post(url, { button: approve })
-  //     .done(function(data) {
-  //       console.log("THIS IS THE DATA ", data);
-  //     });
-  // });
+
+    function saveAgreement() {
+      console.log("clicked!!")
+      var data = { agreement: { approved: status }};
+      console.log(data)
+      $.ajax({
+        type: 'PATCH',
+        url: agreementURL,
+        data: data,
+        success: function(data) {
+          console.log("Success!", data);
+        },
+        error: function(data) {
+          console.log("ERROR");
+        }
+      }); //closing ajax
+    } //closing saveAgreement
+    saveAgreement();
+  }); //closing on submit
 
 
   //display reviews to current user
@@ -28,7 +43,6 @@ $(document).ready(function() {
   $("#userreview-button").click(function() {
     $("#user-review").toggle();
   });
-
 
   // review on submit function
   $("#user-review").on('submit', function(e) {

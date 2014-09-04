@@ -10,10 +10,29 @@ class AgreementsController < ApplicationController
 	end
 
   def update
-    # CREATE ROUTE!!!
-    rental_id =
-    agreement = Agreement.find_by_user_id()
+    rental_params = params.require(:agreement).permit(:approved)
+    agreement = current_user.agreements.find_by_id(params[:id])
+    agreement.update rental_params
+    render json: agreement, status: 200
+  end
 
+  def show
+    agreement_params = params[:agreement].permit(:approved)
+
+    agreement_id = params[:id]
+    agreement = Agreement.find(agreement_id)
+      if params["decline"]
+        agreement.approved = false
+      end
+      if params["approve"]
+        agreement.approved = true
+      end
+    agreement.save
+
+    # update attributes
+    @agreement = @agreement.approved.update_attributes(agreement_params)
+
+    render json: @agreement
   end
 
 end

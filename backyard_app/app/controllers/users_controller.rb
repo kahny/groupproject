@@ -61,8 +61,20 @@ class UsersController < ApplicationController
     #find user for nav bar
     @current_user = current_user
 
+    # will pull all the owners agreements from the agreement table
     rental_ids = @user.rentals.map(&:id)
     @owners_agreements = Agreement.where(rental_id: rental_ids)
+
+
+    @owners_denied_agreements = Agreement.where(rental_id: rental_ids, approved: false)
+    @owners_pending_agreements = Agreement.where(rental_id: rental_ids, approved: nil)
+    @owners_approved_agreements = Agreement.where(rental_id: rental_ids, approved: true)
+
+    # anyone who has put in a request (in the agreement table)
+    @renters_agreements = Agreement.where(user_id: @current_user)
+    @renters_denied_agreements = Agreement.where(user_id: @current_user, approved: false)
+    @renters_approved_agreements = Agreement.where(user_id: @current_user, approved: true)
+    @renters_pending_agreements = Agreement.where(user_id: @current_user, approved: nil)
 
   end
 end
