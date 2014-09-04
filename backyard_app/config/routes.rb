@@ -33,6 +33,10 @@ Rails.application.routes.draw do
       resources :rentals
   end
 
+  resources :rentals do
+    resources :agreements
+  end
+
   resources :passwords
 
 end

@@ -24,6 +24,18 @@
   <div class="col-sm-6">
     <div id='rental-show' class='map'> </div>
   </div>
+
+  <div>
+    <%= form_for [@rental, @agreement] do |f| %>
+      <div class="form-group">
+        <%= f.text_field :rent_date %>
+      </div>
+      <div class="form-group">
+        <!-- <input type="text" placeholder="MM/DD/YYYY"/> -->
+        <button type="submit" class="btn btn-danger">Book it!</button>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 

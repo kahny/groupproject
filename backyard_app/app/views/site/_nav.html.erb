@@ -18,6 +18,7 @@
       <ul class="nav navbar-nav navbar-right">
          <% if @current_user %>
            <p class="navbar-text"><a href="/users/<%= @current_user.id  %>"><%= @current_user.first_name %></a></p>
+          <li><a href="/users/<%= @current_user.id %>/rentals/new">Add Listing</a></li>
           <li><a href="/logout">Logout</a></li>
         <% else %>
           <li><a href="/login">Login</a></li>
