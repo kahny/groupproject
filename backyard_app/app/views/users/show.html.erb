@@ -54,7 +54,7 @@
       <div class="pending-requests">
        <!-- PENDING REQUESTS -->
       <% if @owners_agreements.length > 0 %>
-       <h5>You have <%= @owners_agreements.length %> pending rental requests</h5>
+        <h5> You have <%= @owners_pending_agreements.length %> pending rental requests </h5>
          <% @owners_pending_agreements.each do |agreement| %>
             <!-- setting variables -->
             <% agreementid = agreement.rental_id %>
@@ -62,7 +62,6 @@
 
             <% renterid = agreement.user_id %>
             <% user = User.find_by_id(renterid) %>
-
             <!-- REQUESTER INFORMATION -->
             <div class="single-request">
               <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
@@ -78,7 +77,6 @@
         <!-- end if @owners_agreements.length -->
       <% end %>
       </div>
-    </div>
 
     <!-- REVIEWS -->
     <!-- ONLY VISIBLE TO CURRENT USER -->

@@ -3,10 +3,10 @@ $(document).ready(function() {
   // approve renters!
   $(".approval-form").on('click', "input", function(e) {
     e.preventDefault();
-    $(this).hide();
+    $(".approval-form").hide();
 
     var agreementURL = $(this).parent().attr('action');
-    var status = this.name;
+    var status = this.name === "approve" ? true : false;
 
 
     function saveAgreement() {
