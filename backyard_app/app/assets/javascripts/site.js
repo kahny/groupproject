@@ -32,7 +32,7 @@ $(function(){
 
       	$("#listings").append(compiledTemplate);
 
-      	map.setView([lat,long],10);
+      	map.setView([lat,long],12);
 
         myLayer.setGeoJSON(data);
         myLayer.on('click', function(e) {
