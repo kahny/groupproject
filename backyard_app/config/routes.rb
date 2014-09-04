@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'search/index'
+
   get 'passwords/new'
 
   root to: "site#index"
 
-  get "/search",    to: "site#search", as: "search"
+  # get "/search",    to: "site#search", as: "search"
 
   get "/login",     to: "session#new"
 
@@ -27,6 +29,7 @@ Rails.application.routes.draw do
 
   post "/password/:id", to: "passwords#update"
 
+  resources :search
 
   resources :users do
       resources :reviews

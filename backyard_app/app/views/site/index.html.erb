@@ -2,29 +2,4 @@
 <%= render partial: "header" %>
 
 
-	<div class="row">
-		<div class="fixed">
-			<div id="map-container" class="col-xs-12 col-sm-5">
-				<div id='map'>
-				</div>
-			</div>
-		</div>
-			<div id="listings"></div>
 
-
-
-
-
-<script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
-var map = L.mapbox.map('map', 'davidjavate.jd8jfekm', {
-  scrollWheelZoom: false
-});
-
-map.setView([37.7833,-122.4167], 12);
-
-console.log($(".container"));
-
-
-var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
-</script>
