@@ -12,7 +12,7 @@ $(document).ready(function() {
     function saveAgreement() {
       console.log("clicked!!")
       var data = { agreement: { approved: status }};
-      console.log(data)
+      console.log(data);
       $.ajax({
         type: 'PATCH',
         url: agreementURL,

@@ -3,8 +3,9 @@
 <!-- renter information -->
 <div class="row" id="renter-name">
   <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+    <a href ="/users/<%= @renter.id%>">
       <img id="user-pic" src="<%= @renter.image_url %>">
-      <h3><%= @renter.first_name %> <%= @renter.last_name %></h3>
+      <h3><%= @renter.first_name %> <%= @renter.last_name %></h3></a>
 
   </div>
 </div>
