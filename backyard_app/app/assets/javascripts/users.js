@@ -14,6 +14,9 @@ $(document).ready(function() {
   // });
 
 
+  //display reviews to current user
+  $("#userreview-display-CU").hide();
+
   $("#review-show-link").click(function() {
     $("#userreview-display-CU").toggle();
   });
