@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   		:image_url,
   		:isOwner,
   		:location)
-  	user = User.create(new_user)
+  	User.create(new_user)
 
   	redirect_to root_path
   end
@@ -54,8 +54,11 @@ class UsersController < ApplicationController
     user_id = params[:id]
     @user = User.find_by_id(user_id)
 
-    @reviews = @user.reviews
-    @review = @user.reviews.new
+
+    @user_reviews = @user.reviews || []
+    @new_user_review = @user.reviews.new
+
+
     #find user for nav bar
     @current_user = current_user
     rental_ids = @user.rentals.map(&:id)

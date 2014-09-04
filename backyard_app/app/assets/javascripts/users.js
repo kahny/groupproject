@@ -1,37 +1,12 @@
 $(document).ready(function() {
 
-  // map on page
-  L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
+  $("#user-review").hide();
 
-    var location = $("#rental-location").text();
-    console.log(location);
-
-    var rentalLocation = [];
-    var map = L.mapbox.map('rental-show', 'davidjavate.jd8jfekm', {
-      scrollWheelZoom: false,});
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // hiding review form
-  $("#rental-review").hide();
-
-  //on click, show form
-  $("#review-button").click(function() {
-    $("#rental-review").toggle();
+  $("#userreview-button").click(function() {
+    $("#user-review").toggle();
   });
 
-  //submit review form
-  $("#rental-review").on('submit', function(e) {
+  $("#user-review").on('submit', function(e) {
     e.preventDefault();
 
     var rating = $("#rating-val").val();
@@ -48,8 +23,11 @@ $(document).ready(function() {
         console.log("Success with data!", data);
 
         // append new review to page
-        $("#review-display").append(
+        $("#userreview-display").append(
           data.description);
+
+        $("#userreview-display").append(
+          data.rating);
 
         // reset form values
         $("#rating-val").val(1);
@@ -67,4 +45,3 @@ $(document).ready(function() {
 
 
 }); //closing all
-
