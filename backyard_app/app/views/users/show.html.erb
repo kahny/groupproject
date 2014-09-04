@@ -41,7 +41,7 @@
         <p><strong>Your current listings:</strong></p>
         <% @user.rentals.each do |rental| %>
           <div class="my-listings">
-            <p><%= rental.title %></p>
+            <a href="/users/<%= @current_user.id %>/rentals/<%= rental.id %>"><p><%= rental.title %></p></a>
             <p> <%= rental.description %></p>
             <p>Current asking price: $<%= rental.price %>/day</p>
             <!-- CURRENTLY NOT FUNCTIONAL 9/3 8:40pm -->
@@ -49,6 +49,28 @@
           </div>
         <% end %>
       </div>
+
+  <!-- div closing first column  -->
+  </div>
+
+    <!-- REVIEWS -->
+    <!-- ONLY VISIBLE TO CURRENT USER -->
+    <div class="col-sm-5 col-sm-offset-1">
+      <div id="your-reviews">
+        <h5> <%= @user.reviews.length %> people have reviewed you!</h5>
+        <button class="btn btn-primary btn-sm" id="review-show-link">See your reviews</button>
+          <div id ="userreview-display-CU">
+            <% if @user.reviews.length > 0 %>
+              <% @user.reviews.each do |review| %>
+                <% if review.description != nil %>
+                  <p><%= review.description %></p> <br>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+      </div>
+
+      <div id="your-updates">
 
       <!-- PENDING REQUESTS -->
       <div class="pending-requests">
@@ -81,7 +103,7 @@
       </div>
 
       <!-- APPROVED REQUESTS -->
-      <div class="approved-requests">
+      <div class="upcoming-visits">
         <% if @owners_approved_agreements.length > 0 %>
           <h5>Upcoming Visitors:</h5>
            <% @owners_approved_agreements.each do |agreement| %>
@@ -148,27 +170,11 @@
           <% end %>
         <!-- ending renters_agreements.length -->
         <% end %>
+        </div>
       </div>
-  <!-- div closing first column  -->
-  </div>
-
-    <!-- REVIEWS -->
-    <!-- ONLY VISIBLE TO CURRENT USER -->
-    <div class="col-sm-5">
-      <h4> <%= @user.reviews.length %> people have reviewed you!</h4>
-      <a href="javascript:void(0);" id="review-show-link">See your reviews</a>
-          <div id ="userreview-display-CU">
-            <% if @user.reviews.length > 0 %>
-              <% @user.reviews.each do |review| %>
-                <% if review.description != nil %>
-                  <p><%= review.description %></p> <br>
-                <% end %>
-              <% end %>
-            <% end %>
-          </div>
+    <!-- closing column 2 -->
     </div>
 <!-- closing row 2 -->
-
 </div>
 
 
