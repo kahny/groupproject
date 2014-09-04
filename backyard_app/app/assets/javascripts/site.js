@@ -7,8 +7,7 @@ $(function(){
  $("#search-bar").on('submit', function(e){
   e.preventDefault();
   var value = $(".searchval").val();
-  console.log("before")
-  console.log("after")
+
  	$(".leaflet-marker-pane img").remove();
 
   $.ajax({
@@ -20,15 +19,20 @@ $(function(){
 
       	$(".searchval").val("");
 
-      	console.log(data);
+
+
+      	var lat = data.features[data.features.length-1][0];
+      	var long = data.features[data.features.length-1][1];
+
       	$("#listings").html("");
       	// debugger;
       	var compiledTemplate = HandlebarsTemplates["site/index"]({result: data.features});
-      	console.log(compiledTemplate);
-      	console.log(data.title);
+      	// console.log(compiledTemplate);
+      	// console.log(data.title);
 
       	$("#listings").append(compiledTemplate);
 
+      	map.setView([lat,long],10);
 
         myLayer.setGeoJSON(data);
         myLayer.on('click', function(e) {

@@ -43,9 +43,12 @@ class SiteController < ApplicationController
           :'marker-color'  => '65C18F',
           :'marker-symbol' => 'circle',
           :'marker-size'   => 'medium'
+
         }
       }
     end
+    @features <<  @lat_long
+
 
     #Add features array to @geojson to yield markers
     @geojson = JSON.generate({
