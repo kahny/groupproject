@@ -40,6 +40,7 @@
 
   <h2>Add a review</h2></a>
       <form id = "user-review" action = "/users/<%= @user.id %>/reviews" method="post">
+
         <div class= "form-group">
           <!-- hidden input to get current user id  -->
           <input type="hidden" value="<%= @user.id %>" name="review[user_id]">
