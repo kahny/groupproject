@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   post "/users/:user_id/rentals/:rental_id/reviews",  to: "reviews#create"
 
+  post "/password/:id", to: "passwords#update"
+
 
   resources :users do
       resources :reviews
