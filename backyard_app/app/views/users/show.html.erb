@@ -71,7 +71,7 @@
     </div>
 </div>
 
-
+<!-- ONLY VISIBLE TO NON-CURRENT USERS -->
 <% else %>
   <div class="row">
    <div class="col-sm-6 col-sm-offset-1">
@@ -92,13 +92,13 @@
 
 <!-- ROW 3 of 3 -->
 <div class ="row">
-  <div class="col-xs-6 col-xs-offset-1">
+  <div class="col-xs-12 col-sm-4 col-xs-offset-6">
   <!-- REVIEWS -->
-  <!-- if user -->
+  <!-- ONLY VISIBLE TO CURRENT USER -->
   <% if @current_user == @user %>
-    <h4> <%= @user.reviews.length %> have reviewed you!</h4>
-    <a href="javascript:void(0);"><p>See reviews</p></a>
-      <div id ="userreview-display">
+    <h4> <%= @user.reviews.length %> people have reviewed you!</h4>
+    <a href="javascript:void(0);" id="review-show-link">See your reviews</a>
+        <div id ="userreview-display-CU">
           <% if @user.reviews.length > 0 %>
             <% @user.reviews.each do |review| %>
               <% if review.description != nil %>
@@ -107,10 +107,11 @@
             <% end %>
           <% end %>
         </div>
+
   <!-- if not current user >> USER REVIEW FORM -->
   <% else %>
      <p> Have you visited <%= @user.first_name %>? <a href="javascript:void(0);" id ="userreview-button">Leave a review</a></p>
-        <form id = "user-review" action = "/users/<%= @user.id %>/reviews" method="post">
+        <form id="user-review" action="/users/<%= @user.id %>/reviews" method="post">
 
             <div class= "form-group">
               <label>Rating (1-5):</label>
@@ -127,8 +128,8 @@
 
   </div>
 
-  <!-- display reviews -->
-  <div class="col-sm-6 col-sm-offset-1">
+  <!-- DISPLAY REVIEWS -->
+  <div class="col-sm-4 col-sm-offset-6">
     <% if @user.reviews.length > 0 %>
       <h3>Reviews (<%= @user.reviews.length %>)</h3>
 

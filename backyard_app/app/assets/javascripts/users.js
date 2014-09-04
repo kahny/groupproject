@@ -1,18 +1,22 @@
 $(document).ready(function() {
 
   // approve renters!
-  $("#approval-button").on('click', function(e) {
-    e.preventDefault();
+  // $("#approval-button").on('click', function(e) {
+  //   e.preventDefault();
 
-    var url = $(this).attr('action');
-    var approve = $(this).attr('data-value');
+  //   var url = $(this).attr('action');
+  //   var approve = $(this).attr('data-value');
 
-    $.post(url, { button: approve })
-      .done(function(data) {
-        console.log("THIS IS THE DATA ", data);
-      });
+  //   $.post(url, { button: approve })
+  //     .done(function(data) {
+  //       console.log("THIS IS THE DATA ", data);
+  //     });
+  // });
+
+
+  $("#review-show-link").click(function() {
+    $("#userreview-display-CU").toggle();
   });
-
 
 
   // hiding review form
