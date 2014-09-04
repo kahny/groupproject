@@ -54,7 +54,7 @@ $(function(){
 	    });
 		};
 
-		if (result) {
+		if (typeof result !== 'undefined') {
 			listingCall(result);
 		}
 });
