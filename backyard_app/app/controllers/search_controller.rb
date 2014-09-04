@@ -13,6 +13,9 @@ class SearchController < ApplicationController
   def new
   	# loc = params.require(:search)
     loc = params[:search]
+    range = params[:range]
+
+
 # distance buttons need to add up if mutiple
     p "we're getting here"
 
@@ -23,10 +26,11 @@ class SearchController < ApplicationController
     @lat_long.each do |location|
       location_arr << location
     end
-
-    @locations = Rental.near(location_arr, 30)
-
-
+    if range != nil
+      @locations = Rental.near(location_arr, range)
+    else
+      @locations = Rental.near(location_arr, 10)
+    end
     @features = Array.new
 
     #Go through locations db and push into features array

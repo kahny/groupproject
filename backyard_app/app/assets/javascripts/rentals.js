@@ -11,17 +11,6 @@ $(document).ready(function() {
   //   //   scrollWheelZoom: false,});
 
 
-
-
-
-
-
-
-
-
-
-
-
   // hiding review form
   $("#rental-review").hide();
 

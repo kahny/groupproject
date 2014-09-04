@@ -2,12 +2,14 @@
   <div class="container">
       <h1 id="sitetitle">backyard application</h1>
       <p id="sitedescrip">take advantage of other people's backyards</p>
-      <%= form_for @search, method: :get, url: '/search', html: {id: 'search-bar-home'} do |f| %>
-        <div class="form-group">
 
-          <%= f.text_field :search, autofocus: true, class: "form-control searchval" %>
+            <%= form_for @search, method: :get, url: '/search', html: {class: "form-inline", id: 'search-bar-home'} do |f| %>
 
-        </div>
+
+            <%= f.text_field :search, autofocus: true, placeholder: "San Francisco", class: "form-control searchval" %>
+
+            <%= f.submit "Search now", class: "btn btn-default" %>
+
       <% end %>
   </div>
 </div>
