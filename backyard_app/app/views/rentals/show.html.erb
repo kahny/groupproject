@@ -23,7 +23,12 @@
   </div>
 
   <div class="col-sm-6">
-    <div id='rental-show' class='map'> </div>
+
+    <div id='rental-show'>
+      <div id="showmap" style ="width: 500px; height: 300px" >
+
+        </div>
+    </div>
   </div>
 
   <div>
@@ -51,8 +56,10 @@
 
     <!-- review form -->
     <a href="javascript:void(0);" id="review-button"><h4>Add a review</h4></a>
+
       <form id="rental-review" action="/users/<%= @rental.user.id %>/rentals/<%= @rental.id %>/reviews" method="post">
         <div class= "form-group">
+
           <label>Rating (1-5):</label>
           <input type="range" min="1" max="5" step="1" value="1" name="review[rating]" id="rating-val" autofocus/><br>
 
@@ -77,4 +84,21 @@
 
    </div>
 </div>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
+var map = L.mapbox.map('showmap', 'davidjavate.jd8jfekm', {
+  scrollWheelZoom: false
+});
+
+map.setView([<%= @rental.latitude%>,<%= @rental.longitude %> ], 16);
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+myLayer.setGeoJSON(<%=raw @geojson %>);
+
+
+
+var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
+</script>
 

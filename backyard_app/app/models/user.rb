@@ -6,20 +6,22 @@ class User < ActiveRecord::Base
 	has_many :agreements, dependent: :destroy
 
 	validates :email,
-		:presence => true,
+		:presence => {:message=> 'Field cannot be left blank'},
 		:uniqueness => true,
 		:format => {:with => /\A[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})\z/}
 
 	validates :password_digest,
-		:presence => true,
+		:presence => {:message=> 'Field cannot be left blank'},
 		:confirmation => true,
 		:length => { minimum: 6 }, on: :create
 
 	validates :first_name,
-		:presence => true
+		:presence => {:message=> 'Field cannot be left blank'}
+
+
 
 	validates :last_name,
-		:presence => true
+		:presence => {:message=> 'Field cannot be left blank'}
 
 
 	# validates :isOwner,

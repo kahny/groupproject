@@ -60,6 +60,7 @@ class RentalsController < ApplicationController
     rental_id = params[:id]
     @rental = Rental.find_by_id(rental_id)
 
+
     #creating variable renter to bring renter info to page
     @renter = @rental.user
 
@@ -71,6 +72,39 @@ class RentalsController < ApplicationController
 
     #create agreement for booking the rental
     @agreement = Agreement.new
+
+    #
+    # id = params[:id]
+    # @rental= Rental.find(id)
+
+    @features = Array.new
+
+    @features << {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [@rental.longitude, @rental.latitude]
+              },
+        properties: {
+          address: @rental.location,
+          :'marker-color'  => '65C18F',
+          :'marker-symbol' => 'circle',
+          :'marker-size'   => 'medium'
+
+              }
+          }
+
+
+    #Add features array to @geojson to yield markers
+    p @geojson = JSON.generate({
+      type: 'FeatureCollection',
+      features: @features
+    })
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @features }  # respond with the created JSON object
+    end
 
   end
 
