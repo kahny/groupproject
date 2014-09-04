@@ -25,6 +25,7 @@
         </div>
       <% end %>
   </div>
+  		<div id="error"></div>
 			<div id="listings"></div>
 </div>
 
@@ -38,11 +39,11 @@ var map = L.mapbox.map('map', 'davidjavate.jd8jfekm', {
   scrollWheelZoom: false
 });
 
-map.setView([37.7833,-122.4167], 12);
+map.setView([37.7833,-122.4167]);
 
 console.log($(".container"));
 
-var result = '<%= @search_result %>'
+var result = '<%= @search_result %>';
 
 var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
 </script>

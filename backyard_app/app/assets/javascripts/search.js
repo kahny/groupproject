@@ -33,8 +33,12 @@ $(function(){
 	      	var compiledTemplate = HandlebarsTemplates["search/index"]({result: data.features});
 	      	// console.log(compiledTemplate);
 	      	// console.log(data.title);
-
-	      	$("#listings").append(compiledTemplate);
+	      	console.log(data.features);
+	      	if (data.features.length < 2) {
+						$("#listings").html("<h1>No listings found</h1>");
+	      	} else {
+	      		$("#listings").html(compiledTemplate);
+	      	}
 
 	      	map.setView([lat,long],12);
 
@@ -47,8 +51,7 @@ $(function(){
 
 	      },
 	      error: function(data) {
-	      	alert("Error");
-					$("listings").html("<h1>No listings found</h1>");
+	      	console.log("Error");
 
 	      }
 	    });
