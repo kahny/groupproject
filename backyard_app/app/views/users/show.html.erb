@@ -7,45 +7,59 @@
      <p><%= @user.location %></p>
   </div>
 
-  <div class="col-md-7">
-    <!-- user welcome message -->
+  <div class="col-sm-7">
+    <!-- WELCOME MESSAGE -->
     <% if @current_user = @user %>
       <h1>Hello, <%= @current_user.first_name %> <%= @current_user.last_name %>!</h1>
     <% else %>
       <h1><%= @user.first_name %> <%= @user.last_name %></h1>
    <% end %>
 
-    <!-- show user current listing -->
-    <% @user.rentals.each do |rental| %>
-      <% if @current_user == @user %>
-        <p><strong>Your current listing:</strong></p>
-        <p><%= rental.title %></p>
-        <p> <%= rental.description %></p>
-        <p>Current asking price: $<%= rental.price %>/day</p>
+    <!-- CURRENT LISTING -->
+    <div class="user-listing">
+      <% @user.rentals.each do |rental| %>
+        <% if @current_user == @user %>
+          <p><strong>Your current listing:</strong></p>
+          <p><%= rental.title %></p>
+          <p> <%= rental.description %></p>
+          <p>Current asking price: $<%= rental.price %>/day</p>
+        <% end %>
       <% end %>
-    <% end %>
+      <!-- CURRENTLY NOT FUNCTIONAL 9/3 8:40pm -->
+      <button class="btn btn-danger">Edit Listing</button>
+    </div>
 
 
-     <!-- pending rentals information -->
+    <div class="pending-requests">
+     <!-- PENDING REQUESTS -->
      <h5>You have <%= @owners_agreements.length %> pending rental requests</h5>
+       <% @owners_agreements.each do |agreement| %>
+          <!-- setting variables -->
+          <% agreementid = agreement.rental_id %>
+          <% rental = Rental.find_by_id(agreementid) %>
 
-     <% @owners_agreements.each do |agreement| %>
-        <!-- setting variables -->
-        <% agreementid = agreement.rental_id %>
-        <% rental = Rental.find_by_id(agreementid) %>
+          <% renterid = agreement.user_id %>
+          <% user = User.find_by_id(renterid) %>
 
-        <% renterid = agreement.user_id %>
-        <% user = User.find_by_id(renterid) %>
+          <!-- REQUESTER INFORMATION -->
+          <div class="single-request">
+            <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
+            <p>Message: <%= agreement.rent_date %></p>
 
-        <!-- appending information to page -->
-        <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
-        <p>Message: <%= agreement.rent_date %></p>
-    <% end %>
+            <!-- IN PROGRESS -->
+            <button class="btn btn-success btn-xs" id="approval-button" data-value="false" method="post" action="/rentals/<%= agreement.rental_id %>/agreements">Approve Visitor</button>
+          </div>
+      <% end %>
+    </div>
+
 
   </div>
 </div>
 
-<!-- user reviews -->
+
+
+
+<!-- REVIEWS -->
 <div class ="row">
   <div class="col-xs-12 col-sm-4 col-sm-offset-1">
   <h4><%= @user.first_name %> <%= @user.last_name %> has <%= @user.reviews.length %> reviews</h4>

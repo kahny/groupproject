@@ -1,3 +1,17 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.user-listing {
+  border: 1px solid black;
+  border-radius: .5em;
+  max-width: 400px;
+  padding: 10px;
+}
+
+.pending-requests {
+  padding-top: 15px;
+}
+
+.single-request {
+  border-bottom: 1px solid black;
+  margin-top: 10px;
+  padding: 10px;
+  max-width: 400px;
+}

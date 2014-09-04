@@ -9,4 +9,11 @@ class AgreementsController < ApplicationController
 		redirect_to root_path
 	end
 
+  def update
+    # CREATE ROUTE!!!
+    rental_id =
+    agreement = Agreement.find_by_user_id()
+
+  end
+
 end

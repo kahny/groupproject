@@ -1,11 +1,28 @@
 $(document).ready(function() {
 
+  $("#approval-button").on('click', function(e) {
+    e.preventDefault();
+
+    var url = $(this).attr('action');
+    var approve = $(this).attr('data-value');
+
+    $.post(url, { button: approve })
+      .done(function(data) {
+        console.log("THIS IS THE DATA ", data);
+      });
+  });
+
+
+
+  // hiding review form
   $("#user-review").hide();
 
   $("#userreview-button").click(function() {
     $("#user-review").toggle();
   });
 
+
+  // review on submit function
   $("#user-review").on('submit', function(e) {
     e.preventDefault();
 
@@ -14,6 +31,7 @@ $(document).ready(function() {
     var user = $("#user-val").val();
     var formURL = $(this).attr('action');
 
+    // appending review to page
     function reviewsToPage() {
       $.ajax({
       type: 'POST',
