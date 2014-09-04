@@ -47,8 +47,6 @@ class SiteController < ApplicationController
       }
     end
 
-    p @features
-
     #Add features array to @geojson to yield markers
     @geojson = JSON.generate({
       type: 'FeatureCollection',

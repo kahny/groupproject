@@ -3,14 +3,15 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$(document).ready(function(){
-
+$(function(){
  $("#search-bar").on('submit', function(e){
- 	var value = $(".searchval").val();
-
+  e.preventDefault();
+  var value = $(".searchval").val();
+  console.log("before")
+  console.log("after")
  	$(".leaflet-marker-pane img").remove();
- 	e.preventDefault();
- 	$.ajax({
+
+  $.ajax({
  			// datatype: "html",
       url: "/search",
       data: { search: value},
