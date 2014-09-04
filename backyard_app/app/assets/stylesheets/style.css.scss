@@ -4,11 +4,15 @@
 
 /* site header*/
 
+body {
+  background-color: rgb(232, 235, 232);
+}
+
 .siteheader {
   height: 400px;
   background-color: rgb(101, 193, 143);
   text-align: center;
-  margin-bottom: 50px;
+
 }
 
 #sitetitle {
