@@ -1,3 +1,32 @@
+
+/* page header */
+#welcome {
+  height: 200px;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
+.rest-of-page {
+  background-color: #C4C7C2;
+  padding-top: 40px;
+}
+
+#user-image {
+  width: 125px;
+  height: 125px;
+  position: absolute;
+  top: 53%;
+  left: 65%;
+  border-radius: 50%;
+  background-color: black;
+}
+
+#profile-edit {
+  margin-top: 40px;
+  margin-left: 200px;
+}
+
+/* listing visible to non-current users */
 .user-listing {
   border: 1px solid black;
   border-radius: .5em;
@@ -5,13 +34,38 @@
   padding: 10px;
 }
 
+.rental-description {
+  float: rigth;
+}
+
+
+/* pending requests visible to current user */
+#rental-listing {
+  border-radius: .5em;
+  width: 500px;
+  padding: 10px;
+  margin-top: 10px;
+}
 .pending-requests {
   padding-top: 15px;
 }
 
+/* information from requestee */
 .single-request {
   border-bottom: 1px solid black;
   margin-top: 10px;
   padding: 10px;
   max-width: 400px;
+}
+
+/* reviews display */
+#userreview-display {
+  border-top: 1px solid black;
+  width: 500px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+span {
+  padding-right: 5px;
 }

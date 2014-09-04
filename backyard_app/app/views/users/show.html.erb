@@ -1,97 +1,148 @@
 
 <%= render partial: "site/nav", locals: { user: @user }  %>
 
-<div class="row">
-  <div class="col-xs-12 col-sm-4 col-sm-offset-1">
-  <img src="<%= @user.image_url %>">
-     <p><%= @user.location %></p>
+<!-- ROW 1 of 3 -->
+<div class="row" id="welcome">
+  <div class="col-xs-12 col-sm-1 col-offset-1">
+    <!-- USER IMAGE -->
+    <img src="<%= @user.image_url %>" id="user-image">
   </div>
 
-  <div class="col-sm-7">
+  <div class="col-sm-6 col-sm-offset-1">
     <!-- WELCOME MESSAGE -->
-    <% if @current_user = @user %>
-      <h1>Hello, <%= @current_user.first_name %> <%= @current_user.last_name %>!</h1>
+    <% if @current_user == @user %>
+      <h3>Hello, <%= @current_user.first_name %> <%= @current_user.last_name %>!</h3>
+
+         <!-- EDIT PROFILE BUTTON -->
+         <div class="col-sm-1 col-sm-offset-12">
+           <button class="btn btn-danger btn-sm" id="profile-edit">Edit Profile</button>
+         </div>
+
     <% else %>
-      <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+      <h3><%= @user.first_name %> <%= @user.last_name %></h3>
    <% end %>
-
-    <!-- CURRENT LISTING -->
-    <div class="user-listing">
-      <% @user.rentals.each do |rental| %>
-        <% if @current_user == @user %>
-          <p><strong>Your current listing:</strong></p>
-          <p><%= rental.title %></p>
-          <p> <%= rental.description %></p>
-          <p>Current asking price: $<%= rental.price %>/day</p>
-        <% end %>
-      <% end %>
-      <!-- CURRENTLY NOT FUNCTIONAL 9/3 8:40pm -->
-      <button class="btn btn-danger">Edit Listing</button>
-    </div>
-
-
-    <div class="pending-requests">
-     <!-- PENDING REQUESTS -->
-     <h5>You have <%= @owners_agreements.length %> pending rental requests</h5>
-       <% @owners_agreements.each do |agreement| %>
-          <!-- setting variables -->
-          <% agreementid = agreement.rental_id %>
-          <% rental = Rental.find_by_id(agreementid) %>
-
-          <% renterid = agreement.user_id %>
-          <% user = User.find_by_id(renterid) %>
-
-          <!-- REQUESTER INFORMATION -->
-          <div class="single-request">
-            <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
-            <p>Message: <%= agreement.rent_date %></p>
-
-            <!-- IN PROGRESS -->
-            <button class="btn btn-success btn-xs" id="approval-button" data-value="false" method="post" action="/rentals/<%= agreement.rental_id %>/agreements">Approve Visitor</button>
-          </div>
-      <% end %>
-    </div>
-
-
   </div>
 </div>
 
 
+<!-- BREAKING UP PAGE FOR COOL COLORS -->
+<div class="rest-of-page">
 
 
-<!-- REVIEWS -->
-<div class ="row">
-  <div class="col-xs-12 col-sm-4 col-sm-offset-1">
-  <h4><%= @user.first_name %> <%= @user.last_name %> has <%= @user.reviews.length %> reviews</h4>
-
-
-  <!-- user review form -->
-  <a href="javascript:void(0);" id ="userreview-button"><p>Add a review</p></a>
-      <form id = "user-review" action = "/users/<%= @user.id %>/reviews" method="post">
-
-          <div class= "form-group">
-            <label>Rating (1-5):</label>
-            <input type="range" min="1" max="5" step="1" value="1" name="review[rating]" id="rating-val" autofocus/>
-
-            <label>Add a review:</label>
-            <textarea class="form-control" rows="5" cols="100" name="review[description]" id="description-val" placeholder="Leave a review"></textarea>
-          </div>
-
-            <%= token_tag form_authenticity_token %>
-
-            <input type="submit" value: "Add Review", class="btn btn-danger">
-      </form>
-  </div>
-
-      <!-- FIX STYLING/SETUP REFERENCE RENTALS REVIEW -->
-      <!-- display reviews -->
-      <div id ="userreview-display" class="col-sm-5">
-        <% if @user.reviews.length > 0 %>
-          <% @user.reviews.each do |review| %>
-            <% if review.description != nil %>
-              <p><%= review.description %></p> <br>
-            <% end %>
-          <% end %>
+<!-- ROW 2 of 3 -->
+<!-- HIDES ALL TO NON-CURRENT USERS -->
+<% if @current_user == @user %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-11 col-sm-offset-1">
+      <!-- CURRENT LISTING -->
+      <div class="user-listing">
+        <% @user.rentals.each do |rental| %>
+          <p><strong>Your current listing:</strong></p>
+          <p><%= rental.title %></p>
+          <p> <%= rental.description %></p>
+          <p>Current asking price: $<%= rental.price %>/day</p>
+          <!-- CURRENTLY NOT FUNCTIONAL 9/3 8:40pm -->
+          <button class="btn btn-danger btn-sm">Edit Listing</button>
         <% end %>
       </div>
+
+
+      <div class="pending-requests">
+       <!-- PENDING REQUESTS -->
+       <h5>You have <%= @owners_agreements.length %> pending rental requests</h5>
+         <% @owners_agreements.each do |agreement| %>
+            <!-- setting variables -->
+            <% agreementid = agreement.rental_id %>
+            <% rental = Rental.find_by_id(agreementid) %>
+
+            <% renterid = agreement.user_id %>
+            <% user = User.find_by_id(renterid) %>
+
+            <!-- REQUESTER INFORMATION -->
+            <div class="single-request">
+              <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
+              <p>Message: <%= agreement.rent_date %></p>
+
+              <!-- IN PROGRESS -->
+              <button class="btn btn-success btn-xs" id="approval-button" data-value="false" method="post" action="/rentals/<%= agreement.rental_id %>/agreements">Approve Visitor</button>
+            </div>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+
+<% else %>
+  <div class="row">
+   <div class="col-sm-6 col-sm-offset-1">
+    <div id="rental-listing">
+      <a href="/users/<%= @user.id%>/rentals/<%= @user.rentals[0].id %>"><h3><%= @user.rentals[0].title %></h3></a>
+        <p><strong>About this backyard:</strong></p>
+        <p><%= @user.rentals[0].description %></p>
+        <img src="<%= @user.rentals[0].image_url %>" id="rental-pic"><br>
+
+        <p><strong>Rent it for the day: </strong></p>
+        <p>$<%= @user.rentals[0].price %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+<!-- ROW 3 of 3 -->
+<div class ="row">
+  <div class="col-xs-6 col-xs-offset-1">
+  <!-- REVIEWS -->
+  <!-- if user -->
+  <% if @current_user == @user %>
+    <h4> <%= @user.reviews.length %> have reviewed you!</h4>
+    <a href="javascript:void(0);"><p>See reviews</p></a>
+      <div id ="userreview-display">
+          <% if @user.reviews.length > 0 %>
+            <% @user.reviews.each do |review| %>
+              <% if review.description != nil %>
+                <p><%= review.description %></p> <br>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+  <!-- if not current user >> USER REVIEW FORM -->
+  <% else %>
+     <p> Have you visited <%= @user.first_name %>? <a href="javascript:void(0);" id ="userreview-button">Leave a review</a></p>
+        <form id = "user-review" action = "/users/<%= @user.id %>/reviews" method="post">
+
+            <div class= "form-group">
+              <label>Rating (1-5):</label>
+              <input type="range" min="1" max="5" step="1" value="1" name="review[rating]" id="rating-val" autofocus/>
+
+              <label>Add a review:</label>
+              <textarea class="form-control" rows="5" cols="100" name="review[description]" id="description-val" placeholder="Leave a review"></textarea>
+            </div>
+
+              <%= token_tag form_authenticity_token %>
+
+              <input type="submit" value: "Add Review", class="btn btn-danger">
+        </form>
+
+  </div>
+
+  <!-- display reviews -->
+  <div class="col-sm-6 col-sm-offset-1">
+    <% if @user.reviews.length > 0 %>
+      <h3>Reviews (<%= @user.reviews.length %>)</h3>
+
+        <% @user.reviews.each do |review| %>
+          <% if review.description != nil %>
+            <div id="userreview-display">
+              <span><img src="https://cdn0.iconfinder.com/data/icons/octicons/1024/heart-24.png"></span> <%= review.description %><br>
+            </div>
+          <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+ <% end %>
  </div>
+
+</div>

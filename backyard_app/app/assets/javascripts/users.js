@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+  // approve renters!
   $("#approval-button").on('click', function(e) {
     e.preventDefault();
 
@@ -43,9 +44,6 @@ $(document).ready(function() {
         // append new review to page
         $("#userreview-display").append(
           data.description);
-
-        $("#userreview-display").append(
-          data.rating);
 
         // reset form values
         $("#rating-val").val(1);
