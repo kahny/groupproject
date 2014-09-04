@@ -35,24 +35,23 @@
 
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-1">
-      <!-- CURRENT LISTING -->
-      <div class="user-listing">
-        <% @user.rentals.each do |rental| %>
-          <p><strong>Your current listing:</strong></p>
-          <p><%= rental.title %></p>
-          <p> <%= rental.description %></p>
-          <p>Current asking price: $<%= rental.price %>/day</p>
-          <!-- CURRENTLY NOT FUNCTIONAL 9/3 8:40pm -->
-          <button class="btn btn-danger btn-sm">Edit Listing</button>
-        <% end %>
 
-      <!-- user listing closing div -->
+      <!-- CURRENT LISTINGS -->
+      <div class="user-listing">
+        <p><strong>Your current listings:</strong></p>
+        <% @user.rentals.each do |rental| %>
+          <div class="my-listings">
+            <p><%= rental.title %></p>
+            <p> <%= rental.description %></p>
+            <p>Current asking price: $<%= rental.price %>/day</p>
+            <!-- CURRENTLY NOT FUNCTIONAL 9/3 8:40pm -->
+            <button class="btn btn-danger btn-sm">Edit Listing</button>
+          </div>
+        <% end %>
       </div>
 
-
-
+      <!-- PENDING REQUESTS -->
       <div class="pending-requests">
-       <!-- PENDING REQUESTS -->
       <% if @owners_agreements.length > 0 %>
         <h5> You have <%= @owners_pending_agreements.length %> pending rental requests </h5>
          <% @owners_pending_agreements.each do |agreement| %>
@@ -62,10 +61,13 @@
 
             <% renterid = agreement.user_id %>
             <% user = User.find_by_id(renterid) %>
+
             <!-- REQUESTER INFORMATION -->
             <div class="single-request">
               <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
-              <p>Message: <%= agreement.rent_date %></p>
+              <p>Message:</p>
+              <p><%= agreement.rent_date %></p>
+
               <!-- APPROVAL BUTTONS -->
               <form action="/rentals/<%= agreement.rental_id %>/agreements/<%= agreement.id %>" method="patch" class="approval-form">
                 <input type="submit" value="Approve" name="approve" class="btn btn-success btn-sm"></input>
@@ -80,59 +82,79 @@
 
       <!-- APPROVED REQUESTS -->
       <div class="approved-requests">
-      <% if @owners_approved_agreements.length > 0 %>
-        <h5>Upcoming Visits:</h5>
-         <% @owners_approved_agreements.each do |agreement| %>
-            <!-- setting variables -->
-            <% agreementid = agreement.rental_id %>
-            <% rental = Rental.find_by_id(agreementid) %>
+        <% if @owners_approved_agreements.length > 0 %>
+          <h5>Upcoming Visitors:</h5>
+           <% @owners_approved_agreements.each do |agreement| %>
+              <!-- setting variables -->
+              <% agreementid = agreement.rental_id %>
+              <% rental = Rental.find_by_id(agreementid) %>
 
-            <% renterid = agreement.user_id %>
-            <% user = User.find_by_id(renterid) %>
-            <!-- REQUESTER INFORMATION -->
-            <div class="single-request">
-              <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
-              <p>Date: <%= agreement.rent_date %></p>
-            </div>
-          <!-- end each do block -->
+              <% renterid = agreement.user_id %>
+              <% user = User.find_by_id(renterid) %>
+
+              <!-- VISITOR INFORMATION -->
+              <div class="single-request">
+                <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
+                <p>Details:</p>
+                <p><%= agreement.rent_date %></p>
+              </div>
+            <!-- end each do block -->
+          <% end %>
+          <!-- end if @owners_agreements.length -->
         <% end %>
-        <!-- end if @owners_agreements.length -->
-      <% end %>
       </div>
 
-      <!-- RENTERS APPROVED RENTAL REQUESTS -->
-      <% if @renters_agreements.length > 0 %>
+      <!-- IF RENTER: APPROVED RENTAL REQUESTS -->
+      <div class="approved-request">
+        <% if @renters_agreements.length > 0 %>
         <% if @renters_approved_agreements.length > 0 %>
-          <h5>Your following requests have been approved <%= @renters_approved_agreements.length %> </h5>
-          <% @renters_approved_agreements.each do |agreement| %>
-            <% agreementid = agreement.rental_id %>
-            <% rental = Rental.find_by_id(agreementid) %>
 
-          <p>Rental: <%= rental.title %></p>
+          <h5>Your request has been approved! </h5>
+          <p>You have upcoming plans for these backyards: </p>
+            <% @renters_approved_agreements.each do |agreement| %>
+              <!-- setting variables -->
+              <% agreementid = agreement.rental_id %>
+              <% rental = Rental.find_by_id(agreementid) %>
+
+              <% renterid = agreement.user_id %>
+              <% user = User.find_by_id(renterid) %>
+
+              <a href="/users/<%= user.id %>/rentals/<%= rental.id %>"><p><%= rental.title %></p></a>
+              <p>Details: </p>
+              <p><%= agreement.rent_date %></p>
           <!-- ending renters_approved_agreements each do  -->
           <% end %>
         <!-- ending renters_approved_agreements.length -->
         <%end%>
+      </div>
 
-        <% if @renters_denied_agreements.length > 0 %>
-          <h5>Your following requests have been denied</h5>
 
-          <% @renters_denied_agreements.each do |agreement| %>
-            <% agreementid = agreement.rental_id %>
-            <% rental = Rental.find_by_id(agreementid) %>
+        <!-- IF RENTER: DENIED RENTAL REQUESTS -->
+        <div class="denied-request">
+          <% if @renters_denied_agreements.length > 0 %>
+            <h5>The host of this listing couldn't accommodate you at this time...</h5>
 
-          <p>Rental: <%= rental.title %></p>
-          <!-- ending each do -->
+              <% @renters_denied_agreements.each do |agreement| %>
+                <!-- setting variables -->
+                <% agreementid = agreement.rental_id %>
+                <% rental = Rental.find_by_id(agreementid) %>
+
+                <% renterid = agreement.user_id %>
+                <% user = User.find_by_id(renterid) %>
+
+                <a href="/users/<%= user.id %>/rentals/<%= rental.id %>"><p><%= rental.title %></p></a>
+              <!-- ending each do -->
+              <% end %>
           <% end %>
+        <!-- ending renters_agreements.length -->
         <% end %>
-
-
-      <!-- ending renters_agreements.length -->
-      <% end %>
+      </div>
+  <!-- div closing first column  -->
+  </div>
 
     <!-- REVIEWS -->
     <!-- ONLY VISIBLE TO CURRENT USER -->
-    <div class="col-sm-5 col-sm-offset-1">
+    <div class="col-sm-5">
       <h4> <%= @user.reviews.length %> people have reviewed you!</h4>
       <a href="javascript:void(0);" id="review-show-link">See your reviews</a>
           <div id ="userreview-display-CU">
@@ -146,7 +168,9 @@
           </div>
     </div>
 <!-- closing row 2 -->
+
 </div>
+
 
 
 <!-- ONLY VISIBLE TO NON-CURRENT USERS -->

@@ -39,7 +39,6 @@ class RentalsController < ApplicationController
       flash[:notice] = "Please login"
       redirect_to login_path
     end
-
   end
 
   def destroy
