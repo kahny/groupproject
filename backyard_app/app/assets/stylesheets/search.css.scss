@@ -11,3 +11,30 @@
 	height: 800px;
 
 }
+
+
+
+#search-bar {
+	max-width: 700px;
+}
+
+#listings {
+	max-width: 600px;
+	float:right;
+
+}
+
+#listings.img {
+  max-height: 320px;
+  overflow: hidden;
+}
+
+#home-thumb {
+	min-width: 300px;
+	max-width: 300px;
+	min-height: 450px;
+}
+
+p {
+	font-size: 1.5em;
+}

@@ -6,7 +6,9 @@ class SearchController < ApplicationController
     @search = ""
 
     @search_result = params[:search]
+    @range  = params[:range]
 
+    p @range
     p @search_result
   end
 
@@ -14,6 +16,7 @@ class SearchController < ApplicationController
   	# loc = params.require(:search)
     loc = params[:search]
     range = params[:range]
+    p params
 
 
 # distance buttons need to add up if mutiple
@@ -29,7 +32,7 @@ class SearchController < ApplicationController
     if range != nil
       @locations = Rental.near(location_arr, range)
     else
-      @locations = Rental.near(location_arr, 10)
+      @locations = Rental.near(location_arr, 3)
     end
     @features = Array.new
 

@@ -3,13 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-#listings.img {
-  max-height: 320px;
+/*#listings.img {
+  max-height: 0px;
+  max-width: 320px;
   overflow: hidden;
 }
 
-/*#home-thumb {
+#home-thumb {
+	min-width: 200px;
 	max-width: 200px;
+	min-height: 700px;
 }
 */
 
