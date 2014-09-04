@@ -1,78 +1,83 @@
+
 <%= render partial: "site/nav", locals: { user: @user }  %>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-1">
   <img src="<%= @user.image_url %>">
      <p><%= @user.location %></p>
   </div>
 
-  <div class="col-md-6">
-      <!-- individual user page -->
-      <% if @current_user = @user %>
-      <h1>Hello,<%= @current_user.first_name %> <%= @current_user.last_name %> !</h1>
-      <% else %>
-     <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-     <% end %>
+  <div class="col-md-7">
+    <!-- user welcome message -->
+    <% if @current_user = @user %>
+      <h1>Hello, <%= @current_user.first_name %> <%= @current_user.last_name %>!</h1>
+    <% else %>
+      <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+   <% end %>
 
-     <h1>You have <%= @owners_agreements.length %> pending rentals</h1>
-
-  <% @owners_agreements.each do |agreement| %>
-    <% agreementid = agreement.rental_id %>
-    <% rental = Rental.find_by_id(agreementid)%>
-
-    <% renterid = agreement.user_id %>
-    <% user = User.find_by_id(renterid) %>
-
-    <p>This is the rental: <%= rental.title %></p>
-    <p>This is the user name: <%= user.first_name %></p>
-    <p>This is the user url: <a href="/users/<%= renterid %>"><%= user.first_name %> </a></p>
-  <% end %>
-
-  </div>
-
-
-</div>
-
-<div class ="row">
-  <div class="col-md-8">
-  <h2><%= @user.first_name %> <%= @user.last_name %> has <%= @user.reviews.length %> reviews</h2>
-  <a href="javascript:void(0);" id ="userreview-button">
-
-  <h2>Add a review</h2></a>
-      <form id = "user-review" action = "/users/<%= @user.id %>/reviews" method="post">
-        <div class= "form-group">
-          <!-- hidden input to get current user id  -->
-          <input type="hidden" value="<%= @user.id %>" name="review[user_id]">
-
-          <label>Rating (1-5):</label>
-          <input type="range" min="1" max="5" step="1" value="1" name = "review[rating]" id="rating-val" autofocus/><br>
-
-          <label>Add a review:</label>
-          <textarea rows="5" cols="100" name="review[description]" id="description-val" placeholder="Leave a review"></textarea>
-
-          <%= token_tag form_authenticity_token %>
-          <input type="submit" value: "Add Review", class="btn btn-danger">
-        </div>
-      </form>
-    </div>
-
-  <div id ="userreview-display" class="col-md-8">
-
-    <% if @user.reviews.length > 0 %>
-      <% @user.reviews.each do |r|%>
-        <% if r.rating != nil %>
-          <h4>Rating: <%= r.rating %> </h4>
-          <h4>Review: <%= r.description %></h4>
-        <% end %>
+    <!-- show user current listing -->
+    <% @user.rentals.each do |rental| %>
+      <% if @current_user == @user %>
+        <p><strong>Your current listing:</strong></p>
+        <p><%= rental.title %></p>
+        <p> <%= rental.description %></p>
+        <p>Current asking price: $<%= rental.price %>/day</p>
       <% end %>
     <% end %>
 
 
+     <!-- pending rentals information -->
+     <h5>You have <%= @owners_agreements.length %> pending rental requests</h5>
 
+     <% @owners_agreements.each do |agreement| %>
+        <!-- setting variables -->
+        <% agreementid = agreement.rental_id %>
+        <% rental = Rental.find_by_id(agreementid) %>
+
+        <% renterid = agreement.user_id %>
+        <% user = User.find_by_id(renterid) %>
+
+        <!-- appending information to page -->
+        <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
+        <p>Message: <%= agreement.rent_date %></p>
+    <% end %>
 
   </div>
+</div>
+
+<!-- user reviews -->
+<div class ="row">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+  <h4><%= @user.first_name %> <%= @user.last_name %> has <%= @user.reviews.length %> reviews</h4>
 
 
+  <!-- user review form -->
+  <a href="javascript:void(0);" id ="userreview-button"><p>Add a review</p></a>
+      <form id = "user-review" action = "/users/<%= @user.id %>/reviews" method="post">
 
+          <div class= "form-group">
+            <label>Rating (1-5):</label>
+            <input type="range" min="1" max="5" step="1" value="1" name="review[rating]" id="rating-val" autofocus/>
+
+            <label>Add a review:</label>
+            <textarea class="form-control" rows="5" cols="100" name="review[description]" id="description-val" placeholder="Leave a review"></textarea>
+          </div>
+
+            <%= token_tag form_authenticity_token %>
+
+            <input type="submit" value: "Add Review", class="btn btn-danger">
+      </form>
   </div>
-  </div>
+
+      <!-- FIX STYLING/SETUP REFERENCE RENTALS REVIEW -->
+      <!-- display reviews -->
+      <div id ="userreview-display" class="col-sm-5">
+        <% if @user.reviews.length > 0 %>
+          <% @user.reviews.each do |review| %>
+            <% if review.description != nil %>
+              <p><%= review.description %></p> <br>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+ </div>
