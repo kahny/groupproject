@@ -3,6 +3,7 @@ class PasswordsController < ApplicationController
     #render reset password form
   end
 
+
   def create
   	user = User.find_by_email(params[:email])
 
@@ -13,9 +14,11 @@ class PasswordsController < ApplicationController
   	redirect_to login_url, notice: "Email was sent with instructions"
   end
 
+
   def edit
     @user = User.find_by_code(params[:id])
   end
+
 
   def update
     user = User.find_by_code(params[:id])
@@ -26,7 +29,7 @@ class PasswordsController < ApplicationController
       :password_confirmation => reset[:password_confirmation])
 
     user[:code] = nil
-
+    flash[:password_reset] = "Password saved. Go ahead and login."
     redirect_to login_path
   end
 
