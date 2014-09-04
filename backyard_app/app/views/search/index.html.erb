@@ -1,0 +1,48 @@
+<%= render partial: "fixedheader", locals: { user: @user } %>
+
+
+
+	<div class="row main-content">
+
+		<div class="fixed">
+			<div id="map-container" class="col-xs-12 col-sm-5">
+				<div id='map'>
+				</div>
+			</div>
+		</div>
+
+<div class="col-xs-12 col-sm-7">
+  <div id="results-container" class="container">
+      <%= form_for @search, method: :get, url: '/search/new', html: {id: 'search-bar'} do |f| %>
+        <div class="form-group">
+
+          <%= f.text_field :search, autofocus: true, class: "form-control searchval" %>
+					<div class="btn">
+						<%= f.submit "Search" %>
+
+<!-- prep for distance buttons  -->
+					</div>
+        </div>
+      <% end %>
+  </div>
+			<div id="listings"></div>
+</div>
+
+
+
+
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
+var map = L.mapbox.map('map', 'davidjavate.jd8jfekm', {
+  scrollWheelZoom: false
+});
+
+map.setView([37.7833,-122.4167], 12);
+
+console.log($(".container"));
+
+var result = '<%= @search_result %>'
+
+var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
+</script>

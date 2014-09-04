@@ -1,0 +1,14 @@
+{{#each result}}
+	{{#if properties.title}}
+		<div class="col-xs-12 col-md-3 " >
+			<div id="home-thumb" class="thumbnail">
+				<img class="crop-height"  src="{{properties.image_url}}">
+					<div class="caption" id="caption-height">
+						<h3><a href="{{properties.url}}"> {{properties.title}} </a></h3>
+						<p id="rental-location">Location: {{properties.address}} </p>
+						<p>$: {{properties.price}} </p>
+					</div>
+			</div>
+		</div>
+	{{/if}}
+{{/each}}
