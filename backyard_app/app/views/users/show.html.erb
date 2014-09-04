@@ -100,6 +100,36 @@
       <% end %>
       </div>
 
+      <!-- RENTERS APPROVED RENTAL REQUESTS -->
+      <% if @renters_agreements.length > 0 %>
+        <% if @renters_approved_agreements.length > 0 %>
+          <h5>Your following requests have been approved <%= @renters_approved_agreements.length %> </h5>
+          <% @renters_approved_agreements.each do |agreement| %>
+            <% agreementid = agreement.rental_id %>
+            <% rental = Rental.find_by_id(agreementid) %>
+
+          <p>Rental: <%= rental.title %></p>
+          <!-- ending renters_approved_agreements each do  -->
+          <% end %>
+        <!-- ending renters_approved_agreements.length -->
+        <%end%>
+
+        <% if @renters_denied_agreements.length > 0 %>
+          <h5>Your following requests have been denied</h5>
+
+          <% @renters_denied_agreements.each do |agreement| %>
+            <% agreementid = agreement.rental_id %>
+            <% rental = Rental.find_by_id(agreementid) %>
+
+          <p>Rental: <%= rental.title %></p>
+          <!-- ending each do -->
+          <% end %>
+        <% end %>
+
+
+      <!-- ending renters_agreements.length -->
+      <% end %>
+
     <!-- REVIEWS -->
     <!-- ONLY VISIBLE TO CURRENT USER -->
     <div class="col-sm-5 col-sm-offset-1">
