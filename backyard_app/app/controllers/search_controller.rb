@@ -32,7 +32,7 @@ class SearchController < ApplicationController
     if range != nil
       @locations = Rental.near(location_arr, range)
     else
-      @locations = Rental.near(location_arr, 3)
+      @locations = Rental.near(location_arr, 1)
     end
     @features = Array.new
 
