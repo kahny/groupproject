@@ -18,11 +18,15 @@
  */
 
 
-#listings {
+/*#listings {
 	border: 5px solid #fof;
+<<<<<<< HEAD:backyard_app/app/assets/stylesheets/application.css
 }
 
 .navbar-nav.navbar-right:last-child
 {
 	margin-right: 0;
 }
+=======
+}*/
+>>>>>>> 58771e0c450595096ee27228150aa6f8970aff3f:app/assets/stylesheets/application.css
