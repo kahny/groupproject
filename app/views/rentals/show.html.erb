@@ -24,24 +24,26 @@
 
   <div class="col-sm-6">
 
-    <div id='rental-show'>
-      <div id="showmap" style ="width: 500px; height: 300px" >
-
+   <div id="book-it-form">
+      <%= form_for [@rental, @agreement] do |f| %>
+        <p>Interested in hanging in this backyard? Send the host a request!</p>
+        <div class="form-group">
+          <%= f.text_field :rent_date, placeholder: "MM/DD/YY" %>
         </div>
+        <div class="form-group">
+          <!-- <input type="text" placeholder="MM/DD/YYYY"/> -->
+          <button type="submit" class="btn btn-danger">Book it!</button>
+        </div>
+      <% end %>
+    </div>
+
+    <div id='rental-show'>
+      <div id="showmap" style ="width: 500px; height: 300px">
+      </div>
     </div>
   </div>
 
-  <div>
-    <%= form_for [@rental, @agreement] do |f| %>
-      <div class="form-group">
-        <%= f.text_field :rent_date %>
-      </div>
-      <div class="form-group">
-        <!-- <input type="text" placeholder="MM/DD/YYYY"/> -->
-        <button type="submit" class="btn btn-danger">Book it!</button>
-      </div>
-    <% end %>
-  </div>
+
 </div>
 
 
@@ -85,20 +87,22 @@
    </div>
 </div>
 
+
+<!-- js script for map -->
 <script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
-var map = L.mapbox.map('showmap', 'davidjavate.jd8jfekm', {
-  scrollWheelZoom: false
-});
+  L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
+  var map = L.mapbox.map('showmap', 'davidjavate.jd8jfekm', {
+    scrollWheelZoom: false
+  });
 
-map.setView([<%= @rental.latitude%>,<%= @rental.longitude %> ], 16);
+  map.setView([<%= @rental.latitude%>,<%= @rental.longitude %> ], 16);
 
-var myLayer = L.mapbox.featureLayer().addTo(map);
+  var myLayer = L.mapbox.featureLayer().addTo(map);
 
-myLayer.setGeoJSON(<%=raw @geojson %>);
+  myLayer.setGeoJSON(<%=raw @geojson %>);
 
 
 
-var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
+  var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
 </script>
 
