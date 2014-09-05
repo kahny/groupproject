@@ -25,17 +25,37 @@
 
 .wassup {
 	position:relative;
-	width:460px;
+	width:420px;
 	height:400px;
 	overflow:hidden;
+	/*top: 20px;*/
 }
+
+.large {
+	position:relative;
+	width:840px;
+	height:400px;
+	overflow:hidden;
+	/*top: 20px;*/
+
+}
+
 
 h2{
 	 position: absolute;
-   top: 200px;
-   left: 0;
+   top: 40%;
+   left: 35%;
    width: 100%;
-   background-color: gray;
+   color: white;
+   font-size: 50px;
+}
+
+.image {
+	opacity:1;
+}
+.image:hover {
+	opacity:.8;
 
 }
+
 
