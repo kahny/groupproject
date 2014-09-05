@@ -21,3 +21,8 @@
 #listings {
 	border: 5px solid #fof;
 }
+
+.navbar-nav.navbar-right:last-child
+{
+	margin-right: 0;
+}
