@@ -8,16 +8,17 @@ $(function(){
  $("#search-bar").on('submit', function(e){
 	  e.preventDefault();
 	  var value = $(".searchval").val();
+	  var range = $("#_range").val();
 
 	 	$(".leaflet-marker-pane img").remove();
-	 	listingCall(value);
+	 	listingCall(value, range);
   });
 
-  var listingCall = function(value){
+  var listingCall = function(value, range){
 	  $.ajax({
 	 			// datatype: "html",
 	      url: "/search/new",
-	      data: { search: value},
+	      data: {range: range, search: value},
 	      success: function(data){
 	      	var myLayer = L.mapbox.featureLayer().addTo(map);
 
