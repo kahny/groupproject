@@ -13,6 +13,11 @@
     <% if @current_user == @user %>
       <h3>Hello, <%= @current_user.first_name %> <%= @current_user.last_name %>!</h3>
 
+        <!-- flash message -->
+        <% flash.each do |k, v|%>
+          <p style="color: green" id="<%= k %>"><%= v %></p>
+        <% end %>
+
          <!-- EDIT PROFILE BUTTON -->
          <div class="col-sm-1 col-sm-offset-12">
            <button class="btn btn-danger btn-sm" id="profile-edit">Edit Profile</button>
