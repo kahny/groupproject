@@ -16,6 +16,49 @@
 }
 */
 
-#caption-height {
+/*#caption-height {
   min-height: 250px;
+}*/
+/*
+.grid{
+	max-height: 100px;
+  overflow: hidden;
 }
+*/
+
+.wassup {
+	position:relative;
+	width:420px;
+	height:400px;
+	overflow:hidden;
+	/*top: 20px;*/
+}
+
+.large {
+	position:relative;
+	width:840px;
+	height:400px;
+	overflow:hidden;
+	/*top: 20px;*/
+
+}
+
+
+h2{
+	 position: absolute;
+   top: 40%;
+   left: 35%;
+   width: 100%;
+   color: white;
+   font-size: 50px;
+}
+
+.image {
+	opacity:1;
+}
+.image:hover {
+	opacity:.8;
+
+}
+
+
