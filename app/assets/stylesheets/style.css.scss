@@ -19,6 +19,7 @@ body {
   font-family:'Lobster', cursive;
   margin-top: 100px;
   font-size: 5em;
+  color:black;
 }
 
 #sitedescrip {
@@ -26,6 +27,7 @@ body {
   margin-bottom: 68px;
   font-size: 1.5em;
   font-family: 'Arimo', sans-serif;
+  color:black;
 }
 
 /* header bar to choose a filter */
@@ -48,7 +50,7 @@ body {
 }
 */
 
-.crop-height {
+.crop-height1 {
   max-height: 320px;
   overflow: hidden;
 }

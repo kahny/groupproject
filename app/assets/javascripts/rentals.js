@@ -1,16 +1,5 @@
 $(document).ready(function() {
 
-  // // map on page
-  // L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
-
-  //   var location = $("#rental-location").text();
-  //   console.log(location);
-
-  //   var rentalLocation = [];
-  //   // var map = L.mapbox.map('rental-show', 'davidjavate.jd8jfekm', {
-  //   //   scrollWheelZoom: false,});
-
-
   // hiding review form
   $("#rental-review").hide();
 

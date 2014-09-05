@@ -10,6 +10,7 @@
 .crop-height {
 	width: 270px !important;
 	height: 250px !important;
+	border-radius: 2%;
 }
 #map {
   position: fixed;
@@ -19,16 +20,19 @@
 	height: 800px;
 }
 
-.thumbnail {
+.thumbnail-search {
 	display: inline-block;
 	height: 410px;
-	width: 420px;
-	border-radius: 3%
+	width: 310px;
+	border-radius: 2%
 }
 
 #search-bar {
-	max-width: 700px;
-	margin: 10px;
+	max-width: 650px;
+	/*margin: 10px;*/
+	margin-top: 50px;
+	margin-bottom: 40px;
+	margin-left: 68px;
 }
 
 #listings {
