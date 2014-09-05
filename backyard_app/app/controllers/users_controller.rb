@@ -18,9 +18,16 @@ class UsersController < ApplicationController
   		:image_url,
   		:isOwner,
   		:location)
-  	User.create(new_user)
+  	@user = User.create(new_user)
 
-  	redirect_to root_path
+    if @user.valid?
+      redirect_to root_path
+    else
+      @errors = @user.errors.full_messages
+      render new_user_path
+    end
+
+
   end
 
   def edit
