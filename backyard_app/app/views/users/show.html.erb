@@ -1,79 +1,236 @@
+
 <%= render partial: "site/nav", locals: { user: @user }  %>
 
-<div class="row">
-  <div class="col-md-6">
-  <img src="<%= @user.image_url %>">
-     <p><%= @user.location %></p>
+<!-- ROW 1 of 3 -->
+<div class="row" id="welcome">
+  <div class="col-xs-12 col-sm-1 col-offset-1">
+    <!-- USER IMAGE -->
+    <img src="<%= @user.image_url %>" id="user-image">
   </div>
 
-  <div class="col-md-6">
-      <!-- individual user page -->
-      <% if @current_user = @user %>
-      <h1>Hello,<%= @current_user.first_name %> <%= @current_user.last_name %> !</h1>
-      <% else %>
-     <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-     <% end %>
+  <div class="col-sm-6 col-sm-offset-1">
+    <!-- WELCOME MESSAGE -->
+    <% if @current_user == @user %>
+      <h3>Hello, <%= @current_user.first_name %> <%= @current_user.last_name %>!</h3>
 
-     <h1>You have <%= @owners_agreements.length %> pending rentals</h1>
+         <!-- EDIT PROFILE BUTTON -->
+         <div class="col-sm-1 col-sm-offset-12">
+           <button class="btn btn-danger btn-sm" id="profile-edit">Edit Profile</button>
+         </div>
 
-  <% @owners_agreements.each do |agreement| %>
-    <% agreementid = agreement.rental_id %>
-    <% rental = Rental.find_by_id(agreementid)%>
-
-    <% renterid = agreement.user_id %>
-    <% user = User.find_by_id(renterid) %>
-
-    <p>This is the rental: <%= rental.title %></p>
-    <p>This is the user name: <%= user.first_name %></p>
-    <p>This is the user url: <a href="/users/<%= renterid %>"><%= user.first_name %> </a></p>
-  <% end %>
-
+    <% else %>
+      <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+   <% end %>
   </div>
+</div>
+
+
+<!-- BREAKING UP PAGE FOR COOL COLORS -->
+<div class="rest-of-page">
+
+<!-- ROW 2 of 3 -->
+<!-- HIDES ALL TO NON-CURRENT USERS -->
+<% if @current_user == @user %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+
+      <!-- CURRENT LISTINGS -->
+      <div class="user-listing">
+        <p><strong>Your current listings:</strong></p>
+        <% @user.rentals.each do |rental| %>
+          <div class="my-listings">
+            <a href="/users/<%= @current_user.id %>/rentals/<%= rental.id %>"><p><%= rental.title %></p></a>
+            <p> <%= rental.description %></p>
+            <p>Current asking price: $<%= rental.price %>/day</p>
+            <!-- CURRENTLY NOT FUNCTIONAL 9/3 8:40pm -->
+            <button class="btn btn-danger btn-sm">Edit Listing</button>
+          </div>
+        <% end %>
+      </div>
+
+  <!-- div closing first column  -->
+  </div>
+
+    <!-- REVIEWS -->
+    <!-- ONLY VISIBLE TO CURRENT USER -->
+    <div class="col-sm-5 col-sm-offset-1">
+      <div id="your-reviews">
+        <h5> <%= @user.reviews.length %> people have reviewed you!</h5>
+        <button class="btn btn-primary btn-sm" id="review-show-link">See your reviews</button>
+          <div id ="userreview-display-CU">
+            <% if @user.reviews.length > 0 %>
+              <% @user.reviews.each do |review| %>
+                <% if review.description != nil %>
+                  <p><%= review.description %></p> <br>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+      </div>
+
+      <div id="your-updates">
+
+      <!-- PENDING REQUESTS -->
+      <div class="pending-requests">
+      <% if @owners_agreements.length > 0 %>
+        <h5> You have <%= @owners_pending_agreements.length %> pending rental requests </h5>
+         <% @owners_pending_agreements.each do |agreement| %>
+            <!-- setting variables -->
+            <% agreementid = agreement.rental_id %>
+            <% rental = Rental.find_by_id(agreementid) %>
+
+            <% renterid = agreement.user_id %>
+            <% user = User.find_by_id(renterid) %>
+
+            <!-- REQUESTER INFORMATION -->
+            <div class="single-request">
+              <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
+              <p>Message:</p>
+              <p><%= agreement.rent_date %></p>
+
+              <!-- APPROVAL BUTTONS -->
+              <form action="/rentals/<%= agreement.rental_id %>/agreements/<%= agreement.id %>" method="patch" class="approval-form">
+                <input type="submit" value="Approve" name="approve" class="btn btn-success btn-sm"></input>
+                <input type="submit" value="Decline" name="decline" class="btn btn-danger btn-sm"></input>
+              </form>
+            </div>
+          <!-- end each do block -->
+        <% end %>
+        <!-- end if @owners_agreements.length -->
+      <% end %>
+      </div>
+
+      <!-- APPROVED REQUESTS -->
+      <div class="upcoming-visits">
+        <% if @owners_approved_agreements.length > 0 %>
+          <h5>Upcoming Visitors:</h5>
+           <% @owners_approved_agreements.each do |agreement| %>
+              <!-- setting variables -->
+              <% agreementid = agreement.rental_id %>
+              <% rental = Rental.find_by_id(agreementid) %>
+
+              <% renterid = agreement.user_id %>
+              <% user = User.find_by_id(renterid) %>
+
+              <!-- VISITOR INFORMATION -->
+              <div class="single-request">
+                <p><a href="/users/<%= renterid %>"><%= user.first_name %> <%= user.last_name %></a></p>
+                <p>Details:</p>
+                <p><%= agreement.rent_date %></p>
+              </div>
+            <!-- end each do block -->
+          <% end %>
+          <!-- end if @owners_agreements.length -->
+        <% end %>
+      </div>
+
+      <!-- IF RENTER: APPROVED RENTAL REQUESTS -->
+      <div class="approved-request">
+        <% if @renters_agreements.length > 0 %>
+        <% if @renters_approved_agreements.length > 0 %>
+
+          <h5>Your request has been approved! </h5>
+          <p>You have upcoming plans for these backyards: </p>
+            <% @renters_approved_agreements.each do |agreement| %>
+              <!-- setting variables -->
+              <% agreementid = agreement.rental_id %>
+              <% rental = Rental.find_by_id(agreementid) %>
+
+              <% renterid = agreement.user_id %>
+              <% user = User.find_by_id(renterid) %>
+
+              <a href="/users/<%= user.id %>/rentals/<%= rental.id %>"><p><%= rental.title %></p></a>
+              <p>Details: </p>
+              <p><%= agreement.rent_date %></p>
+          <!-- ending renters_approved_agreements each do  -->
+          <% end %>
+        <!-- ending renters_approved_agreements.length -->
+        <%end%>
+      </div>
+
+
+        <!-- IF RENTER: DENIED RENTAL REQUESTS -->
+        <div class="denied-request">
+          <% if @renters_denied_agreements.length > 0 %>
+            <h5>The host of this listing couldn't accommodate you at this time...</h5>
+
+              <% @renters_denied_agreements.each do |agreement| %>
+                <!-- setting variables -->
+                <% agreementid = agreement.rental_id %>
+                <% rental = Rental.find_by_id(agreementid) %>
+
+                <% renterid = agreement.user_id %>
+                <% user = User.find_by_id(renterid) %>
+
+                <a href="/users/<%= user.id %>/rentals/<%= rental.id %>"><p><%= rental.title %></p></a>
+              <!-- ending each do -->
+              <% end %>
+          <% end %>
+        <!-- ending renters_agreements.length -->
+        <% end %>
+        </div>
+      </div>
+    <!-- closing column 2 -->
+    </div>
+<!-- closing row 2 -->
+</div>
+
+
+
+<!-- ONLY VISIBLE TO NON-CURRENT USERS -->
+<% else %>
+
+    <div class="row">
+     <div class="col-sm-5 col-sm-offset-1">
+      <!-- RENTAL DISPLAY -->
+        <div id="rental-listing">
+          <a href="/users/<%= @user.id%>/rentals/<%= @user.rentals[0].id %>"><h3><%= @user.rentals[0].title %></h3></a>
+            <h5><strong>About this backyard:</strong></h5>
+            <p><%= @user.rentals[0].description %></p>
+
+            <h5><strong>Rent it for a day! </strong></h5>
+            <p>$<%= @user.rentals[0].price %></p>
+
+            <img src="<%= @user.rentals[0].image_url %>" id="rental-pic"><br>
+
+
+        </div>
+      </div>
+
+    <div class="col-sm-4 col-sm-offset-1" id="userreview-all">
+    <!-- USER REVIEW FORM -->
+       <h4> Have you visited <%= @user.first_name %>'s? <a href="javascript:void(0);" id ="userreview-button">Leave a review</a></h4>
+          <form id="user-review" action="/users/<%= @user.id %>/reviews" method="post">
+
+              <div class= "form-group">
+                <label>Rating (1-5):</label>
+                <input type="range" min="1" max="5" step="1" value="1" name="review[rating]" id="rating-val" autofocus/>
+
+                <label>Add a review:</label>
+                <textarea class="form-control" rows="5" cols="100" name="review[description]" id="description-val" placeholder="Leave a review"></textarea>
+              </div>
+
+                <%= token_tag form_authenticity_token %>
+
+                <input type="submit" value: "Add Review", class="btn btn-danger">
+          </form>
+
+        <!-- REVIEWS DISPLAY -->
+        <% if @user.reviews.length > 0 %>
+          <h5>Reviews (<%= @user.reviews.length %>)</h5>
+          <% @user.reviews.each do |review| %>
+            <% if review.description != nil %>
+              <div id="userreview-display">
+                <span><img src="https://cdn1.iconfinder.com/data/icons/humano2/24x24/actions/bookmark-new.png"></span> <%= review.description %><br>
+              </div>
+            <% end %>
+        <% end %>
+      <% end %>
+    </div>
+
+  <!-- closing row 3 -->
+  </div>
+<% end %>
 
 
 </div>
-
-<div class ="row">
-  <div class="col-md-8">
-  <h2><%= @user.first_name %> <%= @user.last_name %> has <%= @user.reviews.length %> reviews</h2>
-  <a href="javascript:void(0);" id ="userreview-button">
-
-  <h2>Add a review</h2></a>
-      <form id = "user-review" action = "/users/<%= @user.id %>/reviews" method="post">
-
-        <div class= "form-group">
-          <!-- hidden input to get current user id  -->
-          <input type="hidden" value="<%= @user.id %>" name="review[user_id]">
-
-          <label>Rating (1-5):</label>
-          <input type="range" min="1" max="5" step="1" value="1" name = "review[rating]" id="rating-val" autofocus/><br>
-
-          <label>Add a review:</label>
-          <textarea rows="5" cols="100" name="review[description]" id="description-val" placeholder="Leave a review"></textarea>
-
-          <%= token_tag form_authenticity_token %>
-          <input type="submit" value: "Add Review", class="btn btn-danger">
-        </div>
-      </form>
-    </div>
-
-  <div id ="userreview-display" class="col-md-8">
-
-    <% if @user.reviews.length > 0 %>
-      <% @user.reviews.each do |r|%>
-        <% if r.rating != nil %>
-          <h4>Rating: <%= r.rating %> </h4>
-          <h4>Review: <%= r.description %></h4>
-        <% end %>
-      <% end %>
-    <% end %>
-
-
-
-
-  </div>
-
-
-
-  </div>
-  </div>
