@@ -1,0 +1,17 @@
+<%= render partial: "site/nav", locals: { user: @user } %>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+	<h2>Enter your email</h2>
+	<p>We'll send you an email with a link to reset your password.</p>
+	<div class="form-group">
+		<%= form_tag passwords_path do %>
+			<%= text_field_tag :email, nil, placeholder: "Enter your email", class: "form-control" %>
+	</div>
+	<!-- separated button into another form-group for spacing -->
+	<div class="form-group">
+		<%= submit_tag "Reset Password", class: "form-control btn btn-danger"%>
+		<% end %>
+	</div>
+	</div>
+</div>

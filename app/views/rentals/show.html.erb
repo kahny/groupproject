@@ -1,0 +1,104 @@
+<%= render partial: "site/nav", locals: { user: @user }  %>
+
+<!-- renter information -->
+<div class="row" id="renter-name">
+  <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+    <a href ="/users/<%= @renter.id%>">
+      <img id="user-pic" src="<%= @renter.image_url %>">
+      <h3><%= @renter.first_name %> <%= @renter.last_name %></h3></a>
+
+  </div>
+</div>
+
+
+<!-- display rental information -->
+<div class="row">
+  <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+     <h1><%= @rental.title %></h1>
+     <p id="rental-location"><%= @rental.location %></p>
+     <p>$<%= @rental.price %></p>
+     <p><%= @rental.description %></p>
+     <img id="rental-pic" src="<%= @rental.image_url %>">
+
+  </div>
+
+  <div class="col-sm-6">
+
+    <div id='rental-show'>
+      <div id="showmap" style ="width: 500px; height: 300px" >
+
+        </div>
+    </div>
+  </div>
+
+  <div>
+    <%= form_for [@rental, @agreement] do |f| %>
+      <div class="form-group">
+        <%= f.text_field :rent_date %>
+      </div>
+      <div class="form-group">
+        <!-- <input type="text" placeholder="MM/DD/YYYY"/> -->
+        <button type="submit" class="btn btn-danger">Book it!</button>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="row">
+  <!-- review count -->
+   <div id="reviews-show" class="col-xs-12 col-sm-5 col-sm-offset-1">
+    <% if @rental.reviews.length == 1 %>
+    <p><%= @rental.reviews.length %> person has reviewed this backyard</p>
+    <% else %>
+    <p><%= @rental.reviews.length %> people have reviewed this backyard </p>
+  <% end %>
+
+    <!-- review form -->
+    <a href="javascript:void(0);" id="review-button"><h4>Add a review</h4></a>
+
+      <form id="rental-review" action="/users/<%= @rental.user.id %>/rentals/<%= @rental.id %>/reviews" method="post">
+        <div class= "form-group">
+
+          <label>Rating (1-5):</label>
+          <input type="range" min="1" max="5" step="1" value="1" name="review[rating]" id="rating-val" autofocus/><br>
+
+          <label>Add a review:</label>
+          <textarea rows="5" cols="75" name="review[description]" id="description-val" placeholder="Leave a review"></textarea>
+
+          <%= token_tag form_authenticity_token %>
+          <input type="submit" value: "Add Review", class="btn btn-danger">
+        </div>
+      </form>
+
+        <!-- review display -->
+        <div id="review-display">
+            <% if @rental.reviews.length > 0 %>
+            <% @rental.reviews.each do |review|%>
+              <% if review.description != nil %>
+                <p><%= review.description %></p>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+
+   </div>
+</div>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2aWRqYXZhdGUiLCJhIjoiNHpuQVN6ZyJ9.pP7v8vVU8qXdQID-CZI99w';
+var map = L.mapbox.map('showmap', 'davidjavate.jd8jfekm', {
+  scrollWheelZoom: false
+});
+
+map.setView([<%= @rental.latitude%>,<%= @rental.longitude %> ], 16);
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+myLayer.setGeoJSON(<%=raw @geojson %>);
+
+
+
+var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png').addTo(map);
+</script>
+

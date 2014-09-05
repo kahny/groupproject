@@ -1,0 +1,47 @@
+<%= render partial: "site/nav", locals: { user: @user }  %>
+
+<div class="row">
+
+  <div class="col-xs-8 col-sm-4"></div>
+  <div class="col-xs-8 col-sm-4">
+
+<!-- form for the review  -->
+		<br>
+    <%= form_for @user do |f| %>
+  		<div class="form-group">
+	  		<%= f.label :first_name %>:
+	  		<%= f.text_field :first_name, class: "form-control", :autofocus => true %>
+  		</div>
+
+  		<div class="form-group">
+	  		<%= f.label :last_name %>:
+	  		<%= f.text_field :last_name, class: "form-control" %>
+  		</div>
+
+  		<div class="form-group">
+	  		<%= f.label :email %>:
+	  		<%= f.email_field :email, class: "form-control" %>
+  		</div>
+
+  		<div class="form-group">
+	  		<%= f.label :password %>:
+	  		<%= f.password_field :password, class: "form-control" %>
+  		</div>
+
+  		<div class="form-group">
+	  		<%= f.label :image_url %>:
+	  		<%= f.text_field :image_url, class: "form-control" %>
+  		</div>
+
+  		<div class="form-group">
+	  		<%= f.submit "Create User", class: "form-control btn btn-danger" %>
+  		</div>
+  	<% end %>
+
+
+  </div>
+
+  <!-- add go back button to previous results page  -->
+</div>
+
+
