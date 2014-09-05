@@ -28,11 +28,11 @@
       <%= form_for [@rental, @agreement] do |f| %>
         <p>Interested in hanging in this backyard? Send the host a request!</p>
         <div class="form-group">
-          <%= f.text_field :rent_date, placeholder: "MM/DD/YY" %>
+          <%= f.text_field :rent_date, id: "rent-date", placeholder: "MM/DD/YY" %>
         </div>
         <div class="form-group">
           <!-- <input type="text" placeholder="MM/DD/YYYY"/> -->
-          <button type="submit" class="btn btn-danger">Book it!</button>
+          <button type="submit" class="btn btn-danger" id="book-it-button">Book it!</button>
         </div>
       <% end %>
     </div>

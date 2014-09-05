@@ -6,7 +6,9 @@ class AgreementsController < ApplicationController
 		@agreement.rental_id = params[:rental_id]
 		@agreement.user_id = current_user.id
 		@agreement.save
-		redirect_to root_path
+
+    flash[:rental_saved] = "Your request has been sent!"
+    redirect_to user_path(current_user)
 	end
 
   def update
