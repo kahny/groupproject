@@ -54,10 +54,19 @@ class UsersController < ApplicationController
     user_id = params[:id]
     @user = User.find_by_id(user_id)
 
+
     @user_reviews = @user.reviews || []
     @new_user_review = @user.reviews.new
 
+
     #find user for nav bar
     @current_user = current_user
+    rental_ids = @user.rentals.map(&:id)
+    @owners_agreements = Agreement.where(rental_id: rental_ids)
+
+
+    # @renter_id = @owner_agreements.user_id
+
+    # rental_found = Rental.find_by_id()
   end
 end

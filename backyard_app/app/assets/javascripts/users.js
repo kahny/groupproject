@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
   $("#user-review").hide();
 
   $("#userreview-button").click(function() {

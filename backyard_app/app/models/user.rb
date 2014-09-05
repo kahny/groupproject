@@ -1,11 +1,9 @@
 class User < ActiveRecord::Base
-	has_many :rentals, dependent: :destroy
-
-	has_many :reviews, as: :reviewable, dependent: :destroy
-
-	has_many :agreements, dependent: :destroy
-
 	has_secure_password
+
+	has_many :rentals, dependent: :destroy
+	has_many :reviews, as: :reviewable, dependent: :destroy
+	has_many :agreements, dependent: :destroy
 
 	validates :email,
 		:presence => true,

@@ -12,6 +12,7 @@
  *
  *= require bootstrap-3.2.0.min
  *= require bootstrap-3.2.0theme.min
+ *= require mapbox
  *= require_tree .
  *= require_self
  */
@@ -19,4 +20,9 @@
 
 #listings {
 	border: 5px solid #fof;
+}
+
+.navbar-nav.navbar-right:last-child
+{
+	margin-right: 0;
 }

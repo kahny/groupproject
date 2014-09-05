@@ -3,8 +3,9 @@
 <!-- renter information -->
 <div class="row" id="renter-name">
   <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+    <a href ="/users/<%= @renter.id%>">
       <img id="user-pic" src="<%= @renter.image_url %>">
-      <h3><%= @renter.first_name %> <%= @renter.last_name %></h3>
+      <h3><%= @renter.first_name %> <%= @renter.last_name %></h3></a>
 
   </div>
 </div>
@@ -23,6 +24,18 @@
 
   <div class="col-sm-6">
     <div id='rental-show' class='map'> </div>
+  </div>
+
+  <div>
+    <%= form_for [@rental, @agreement] do |f| %>
+      <div class="form-group">
+        <%= f.text_field :rent_date %>
+      </div>
+      <div class="form-group">
+        <!-- <input type="text" placeholder="MM/DD/YYYY"/> -->
+        <button type="submit" class="btn btn-danger">Book it!</button>
+      </div>
+    <% end %>
   </div>
 </div>
 
