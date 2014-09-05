@@ -47,3 +47,7 @@ group :development, :test do
   gem 'ffaker', '~> 1.25.0'
   gem 'nokogiri'
 end
+
+group :production do
+  gem 'rails_12factor'
+end
