@@ -46,6 +46,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'ffaker', '~> 1.25.0'
   gem 'nokogiri'
+  gem 'factory_girl_rails'
 end
 
 group :production do

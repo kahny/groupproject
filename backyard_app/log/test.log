@@ -1,0 +1,219 @@
+  [1m[36mSQL (2.6ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (29.7ms)[0m  CREATE TABLE "rental_users" ("id" serial primary key, "user_id" integer, "rental_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (4.8ms)[0m  [1mCREATE TABLE "rentals" ("id" serial primary key, "title" character varying(255), "description" character varying(255), "location" character varying(255), "price" integer, "category" character varying(255), "image_url" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (4.6ms)[0m  CREATE TABLE "review_users" ("id" serial primary key, "user_id" integer, "review_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (4.0ms)[0m  [1mCREATE TABLE "reviews" ("id" serial primary key, "rating" integer, "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (5.5ms)[0m  CREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "isOwner" boolean, "location" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36m (0.7ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140830232451')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140830222814')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140830222900')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140830223142')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140830232424')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (2.5ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."email" = 'hgkjhkjjgdfasd@jhkjhkjoakner.com' LIMIT 1
+  [1m[36mSQL (1.8ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2014-08-31 04:49:13.852927"], ["email", "hgkjhkjjgdfasd@jhkjhkjoakner.com"], ["first_name", "Palmer"], ["isOwner", "f"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 04:49:13.852927"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["category", "pool"], ["created_at", "2014-08-31 04:49:13.868367"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 04:49:13.868367"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "rental_users" ("created_at", "rental_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-08-31 04:49:13.901492"], ["rental_id", 1], ["updated_at", "2014-08-31 04:49:13.901492"], ["user_id", 1]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mRental Load (0.7ms)[0m  [1mSELECT "rentals".* FROM "rentals" INNER JOIN "rental_users" ON "rentals"."id" = "rental_users"."rental_id" WHERE "rental_users"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["category", "pool"], ["created_at", "2014-08-31 04:54:36.381845"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 04:54:36.381845"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.9ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'hgkjhkjjgdfasd@jhkjhkjoakner.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["created_at", "2014-08-31 04:54:36.407388"], ["email", "hgkjhkjjgdfasd@jhkjhkjoakner.com"], ["first_name", "Palmer"], ["isOwner", "f"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 04:54:36.407388"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["category", "pool"], ["created_at", "2014-08-31 04:54:36.410183"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 04:54:36.410183"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rental_users" ("created_at", "rental_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-08-31 04:54:36.447788"], ["rental_id", 3], ["updated_at", "2014-08-31 04:54:36.447788"], ["user_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mRental Load (0.7ms)[0m  SELECT "rentals".* FROM "rentals" INNER JOIN "rental_users" ON "rentals"."id" = "rental_users"."rental_id" WHERE "rental_users"."user_id" = $1  [["user_id", 2]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "rental_users" ON "users"."id" = "rental_users"."user_id" WHERE "rental_users"."rental_id" = $1[0m  [["rental_id", 3]]
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["category", "pool"], ["created_at", "2014-08-31 04:55:06.926024"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 04:55:06.926024"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (1.5ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'hgkjhkjjgdfasd@jhkjhkjoakner.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["created_at", "2014-08-31 04:55:06.961335"], ["email", "hgkjhkjjgdfasd@jhkjhkjoakner.com"], ["first_name", "Palmer"], ["isOwner", "f"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 04:55:06.961335"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["category", "pool"], ["created_at", "2014-08-31 04:55:06.964580"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 04:55:06.964580"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rental_users" ("created_at", "rental_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-08-31 04:55:06.990633"], ["rental_id", 5], ["updated_at", "2014-08-31 04:55:06.990633"], ["user_id", 3]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mRental Load (0.8ms)[0m  SELECT "rentals".* FROM "rentals" INNER JOIN "rental_users" ON "rentals"."id" = "rental_users"."rental_id" WHERE "rental_users"."user_id" = $1  [["user_id", 3]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "rental_users" ON "users"."id" = "rental_users"."user_id" WHERE "rental_users"."rental_id" = $1[0m  [["rental_id", 5]]
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["category", "pool"], ["created_at", "2014-08-31 04:55:20.001402"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 04:55:20.001402"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.9ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'hgkjhkjjgdfasd@jhkjhkjoakner.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["created_at", "2014-08-31 04:55:20.028190"], ["email", "hgkjhkjjgdfasd@jhkjhkjoakner.com"], ["first_name", "Palmer"], ["isOwner", "f"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 04:55:20.028190"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["category", "pool"], ["created_at", "2014-08-31 04:55:20.030525"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 04:55:20.030525"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rental_users" ("created_at", "rental_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-08-31 04:55:20.063375"], ["rental_id", 7], ["updated_at", "2014-08-31 04:55:20.063375"], ["user_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mRental Load (0.6ms)[0m  SELECT "rentals".* FROM "rentals" INNER JOIN "rental_users" ON "rentals"."id" = "rental_users"."rental_id" WHERE "rental_users"."user_id" = $1  [["user_id", 4]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "rental_users" ON "users"."id" = "rental_users"."user_id" WHERE "rental_users"."rental_id" = $1[0m  [["rental_id", 7]]
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["category", "pool"], ["created_at", "2014-08-31 04:58:03.810642"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 04:58:03.810642"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (1.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'hgkjhkjjgdfasd@jhkjhkjoakner.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["created_at", "2014-08-31 04:58:03.846946"], ["email", "hgkjhkjjgdfasd@jhkjhkjoakner.com"], ["first_name", "Palmer"], ["isOwner", "f"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 04:58:03.846946"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["category", "pool"], ["created_at", "2014-08-31 04:58:03.849151"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 04:58:03.849151"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rental_users" ("created_at", "rental_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-08-31 04:58:03.875365"], ["rental_id", 9], ["updated_at", "2014-08-31 04:58:03.875365"], ["user_id", 5]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mRental Load (0.5ms)[0m  SELECT "rentals".* FROM "rentals" INNER JOIN "rental_users" ON "rentals"."id" = "rental_users"."rental_id" WHERE "rental_users"."user_id" = $1  [["user_id", 5]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "rental_users" ON "users"."id" = "rental_users"."user_id" WHERE "rental_users"."rental_id" = $1[0m  [["rental_id", 9]]
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "reviews" ("created_at", "description", "rating", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-08-31 04:58:03.887188"], ["description", "So close to so good but not bad"], ["rating", 4], ["updated_at", "2014-08-31 04:58:03.887188"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["category", "pool"], ["created_at", "2014-08-31 05:01:01.506751"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 05:01:01.506751"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.9ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'bobby@bob.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["created_at", "2014-08-31 05:01:01.536272"], ["email", "bobby@bob.com"], ["first_name", "Bob"], ["isOwner", "f"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 05:01:01.536272"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["category", "pool"], ["created_at", "2014-08-31 05:01:01.539119"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 05:01:01.539119"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "rental_users" ("created_at", "rental_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-08-31 05:01:01.564366"], ["rental_id", 11], ["updated_at", "2014-08-31 05:01:01.564366"], ["user_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mRental Load (0.8ms)[0m  SELECT "rentals".* FROM "rentals" INNER JOIN "rental_users" ON "rentals"."id" = "rental_users"."rental_id" WHERE "rental_users"."user_id" = $1  [["user_id", 6]]
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "rental_users" ON "users"."id" = "rental_users"."user_id" WHERE "rental_users"."rental_id" = $1[0m  [["rental_id", 11]]
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "reviews" ("created_at", "description", "rating", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-08-31 05:01:01.579846"], ["description", "So close to so good but not bad"], ["rating", 4], ["updated_at", "2014-08-31 05:01:01.579846"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."email" = 'bobby@bob.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2014-08-31 05:01:01.583810"], ["email", "bobby@bob.com"], ["first_name", "Bob"], ["isOwner", "t"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 05:01:01.583810"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "reviews" ("created_at", "description", "rating", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-08-31 05:01:01.585428"], ["description", "So close to so good but not bad"], ["rating", 4], ["updated_at", "2014-08-31 05:01:01.585428"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "review_users" ("created_at", "review_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-08-31 05:01:01.594085"], ["review_id", 3], ["updated_at", "2014-08-31 05:01:01.594085"], ["user_id", 7]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mReview Load (0.4ms)[0m  [1mSELECT "reviews".* FROM "reviews" INNER JOIN "review_users" ON "reviews"."id" = "review_users"."review_id" WHERE "review_users"."user_id" = $1[0m  [["user_id", 7]]
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" INNER JOIN "review_users" ON "users"."id" = "review_users"."user_id" WHERE "review_users"."review_id" = $1  [["review_id", 3]]
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["category", "pool"], ["created_at", "2014-08-31 05:02:15.190061"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 05:02:15.190061"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.9ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'bobby@bob.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["created_at", "2014-08-31 05:02:15.224451"], ["email", "bobby@bob.com"], ["first_name", "Bob"], ["isOwner", "f"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 05:02:15.224451"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "rentals" ("category", "created_at", "description", "image_url", "location", "price", "title", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["category", "pool"], ["created_at", "2014-08-31 05:02:15.226620"], ["description", "Close to everything"], ["image_url", "testurl.com"], ["location", "711 711th Street San Francisco"], ["price", 240], ["title", "Bob's luxury home"], ["updated_at", "2014-08-31 05:02:15.226620"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rental_users" ("created_at", "rental_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-08-31 05:02:15.250801"], ["rental_id", 13], ["updated_at", "2014-08-31 05:02:15.250801"], ["user_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mRental Load (0.6ms)[0m  SELECT "rentals".* FROM "rentals" INNER JOIN "rental_users" ON "rentals"."id" = "rental_users"."rental_id" WHERE "rental_users"."user_id" = $1  [["user_id", 8]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "rental_users" ON "users"."id" = "rental_users"."user_id" WHERE "rental_users"."rental_id" = $1[0m  [["rental_id", 13]]
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "reviews" ("created_at", "description", "rating", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-08-31 05:02:15.263380"], ["description", "So close to so good but not bad"], ["rating", 4], ["updated_at", "2014-08-31 05:02:15.263380"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."email" = 'bobby@bob.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2014-08-31 05:02:15.267324"], ["email", "bobby@bob.com"], ["first_name", "Bob"], ["isOwner", "t"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 05:02:15.267324"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "reviews" ("created_at", "description", "rating", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-08-31 05:02:15.268875"], ["description", "So close to so good but not bad"], ["rating", 4], ["updated_at", "2014-08-31 05:02:15.268875"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "review_users" ("created_at", "review_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-08-31 05:02:15.277799"], ["review_id", 5], ["updated_at", "2014-08-31 05:02:15.277799"], ["user_id", 9]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mReview Load (0.4ms)[0m  [1mSELECT "reviews".* FROM "reviews" INNER JOIN "review_users" ON "reviews"."id" = "review_users"."review_id" WHERE "review_users"."user_id" = $1[0m  [["user_id", 9]]
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" INNER JOIN "review_users" ON "users"."id" = "review_users"."user_id" WHERE "review_users"."review_id" = $1  [["review_id", 5]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."email" = 'bobby@bob.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "isOwner", "last_name", "location", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2014-08-31 05:02:15.286527"], ["email", "bobby@bob.com"], ["first_name", "Bob"], ["isOwner", "f"], ["last_name", "Sanderson"], ["location", "location"], ["password_digest", "12341234"], ["updated_at", "2014-08-31 05:02:15.286527"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."first_name" = 'Bob' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (4.3ms)[0m  CREATE EXTENSION IF NOT EXISTS "plpgsql"
+  [1m[36m (22.0ms)[0m  [1mCREATE TABLE "agreements" ("id" serial primary key, "rental_id" integer, "user_id" integer, "created_at" timestamp, "updated_at" timestamp, "rent_date" character varying(255), "approved" boolean) [0m
+  [1m[35m (5.8ms)[0m  CREATE TABLE "rentals" ("id" serial primary key, "user_id" integer, "title" character varying(255), "description" character varying(255), "location" character varying(255), "latitude" float, "longitude" float, "price" integer, "category" character varying(255), "image_url" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (6.8ms)[0m  [1mCREATE TABLE "reviews" ("id" serial primary key, "user_id" integer, "rating" integer, "description" text, "reviewable_id" integer, "reviewable_type" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (4.1ms)[0m  CREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "isOwner" boolean, "location" character varying(255), "image_url" character varying(255), "created_at" timestamp, "updated_at" timestamp, "code" character varying(255), "expires_at" timestamp) 
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (1.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140903053659')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140830222814')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140830222900')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140830223142')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140901184659')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140901224018')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
