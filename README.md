@@ -11,7 +11,7 @@ This site was made as part of a group project for General Assembly's Web Develop
 [Alli Cernoch](https://github.com/msalli)	
 [Connie Chang](https://github.com/kahny)	
 [David Javate](https://github.com/davidjavate)	
-[Palmer Sanderson]("https://github.com/DoriPS13)
+[Palmer Sanderson](https://github.com/DoriPS13)
 
 
 ####Web Technologies:
