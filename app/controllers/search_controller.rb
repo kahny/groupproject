@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
- def index
+  def index
     #find user for nav bar
     @current_user = current_user
 
@@ -13,14 +13,11 @@ class SearchController < ApplicationController
   end
 
   def new
-  	# loc = params.require(:search)
+
     loc = params[:search]
     range = params[:range]
     p params
 
-
-# distance buttons need to add up if mutiple
-    p "we're getting here"
 
     @lat_long = Geocoder.coordinates(loc)
 
